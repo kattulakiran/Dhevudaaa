@@ -1,0 +1,7 @@
+html,body{
+    background: url('images/premium.jpg') fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+ 
+    }

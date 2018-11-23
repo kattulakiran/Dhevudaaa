@@ -1,0 +1,74 @@
+<app-user-mainpage></app-user-mainpage>
+
+<div id="block" class="mt-5">
+
+    
+   
+ 
+    <div class="container1">
+      <!---heading-->
+
+      <header class="heading">Registered Pay Details</header><hr>
+      
+      <form (ngSubmit)="onSubmit()">
+                 
+          <div class="col-sm-12 mt-3">
+              <div class="row justify-content-center">
+            
+                <div class="col-md-2"><label style="color: white" ><h5>*Policy Id :</h5></label>  </div>
+                <div class="col-md-3">
+                <select [(ngModel)]="regpay.policy_id" name="policy_id" class="form-control ">
+                  <option value="null" disabled>--select policy--</option>
+               <option [ngValue]="vehicle.policy_id" *ngFor='let vehicle of vehicles'>{{vehicle.policy_id}}</option>
+             </select>
+            </div>
+
+            <div class="">
+                <button type="submit" class="btn btn-success">Submit</button>
+              </div>
+
+            
+           </div>
+      </div>  
+     
+       
+      </form>
+        
+
+         
+          <div class="card mt-5">
+              <div class="card-header"></div>
+              <div class="card-body">
+    
+                <table class="table table-responsive table-sm table-bordered ">
+  
+     
+      <tr>
+       
+        <th>Policy Id</th>
+        <th>Payment Id</th>
+        <th>Premium Amount</th>
+        <th>Due Date</th>
+        <th>Payment Date</th>
+        <th>Payment Mode</th>
+        <th>Amount Paid</th>
+      
+      </tr>
+    
+      <tr *ngFor="let regpay of regpays">
+        <td>{{regpay.policy_id}}</td>
+        <td>{{regpay.payment_id}}</td>
+        <td>{{regpay.premium_amount}}</td>
+        <td>{{regpay.due_date}}</td>
+        <td>{{regpay.paid_date}}</td>
+        <td>{{regpay.payment_mode}}</td>
+        <td>{{regpay.pay_amount}}</td>  
+        
+  
+      </tr>
+     
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>

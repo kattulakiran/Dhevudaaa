@@ -1,0 +1,172 @@
+<app-user-mainpage></app-user-mainpage>
+
+<div id="block" class="container mt-5">
+
+
+   
+
+  <form>
+        <div class="container1">
+
+         
+          <!---heading-->
+              <header class="heading">Registered Pay</header><hr>
+
+            <div><p style="color:yellow;text-align: center">{{message}}</p></div>
+
+           <!---Form starting--> 
+           <div class="row">
+            <!--- For Policy Id-->
+               <div class="col-sm-12 mt-3">
+                      <div class="row justify-content-center">
+                    
+                        <div class="col-md-4"><label style="color: white" ><h5>*Policy Id :</h5></label> </div>
+                        <div class="col-md-3">
+                            <select [(ngModel)]="regpay.policy_id" name="policy_id" class="form-control ">
+                              <option value="null" disabled>--select policy--</option>
+                           <option [ngValue]="vehicle.policy_id" *ngFor='let vehicle of vehicles'>{{vehicle.policy_id}}</option>
+                         </select>
+                      
+                         </div>
+
+            <div class=""> 
+                           
+                          
+   <button type="submit" (click)="registerpay()" class="btn btn-success"  >Submit</button></div>
+
+         </div>
+              </div>  
+  
+             
+      
+              
+                 
+
+               
+
+          
+  
+   <!--- For Payment Mode-->
+   <div class="col-sm-12 mt-3">
+      <div class="row justify-content-center">
+    
+        <div class="col-md-4"><label style="color: white" ><h5>*Payment Mode :</h5></label> </div>
+      <div class="col-md-4">
+          <select [(ngModel)]="regpay.payment_mode" name="payment_mode" id="paymentMode"  class="form-control ">
+              <option value="null" disabled>--Payment Mode--</option>
+              <option value="Debit Card">Debit Card</option>  
+              <option value="Credit Card">Credit Card</option>
+              <option value="Net Banking">Net Banking</option>
+              </select>
+      </div>
+   </div>
+</div>            
+
+
+
+
+<div class="container mt-3 mb-3">
+  <button type="submit" (click)="makePayment()" class=" btn btn-success btn-block" data-toggle="modal" data-target="#exampleModalCenter">Pay</button>
+  <button type="reset" class="btn btn-danger btn-block">Reset</button>
+
+</div>
+
+
+
+
+
+
+</div>	 
+
+</div>
+</form>  
+</div>     
+
+<!--======================Alert boxes=====================-->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+     {{message}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<app-user-mainpage></app-user-mainpage>
+
+<div id="block" class="container mt-5">
+
+  
+        <div class="container1">
+<div class="col-md-6">
+  <h2 class="heading">Registered Pay</h2>
+<form>
+  <div class="row justify-content-center">
+  <div class="form-group">
+    <label for="policy_id">Policy ID:</label>
+    <input type="text" [(ngModel)]="registeredpay.policy_id" placeholder="Policy ID" name="policy_id" class="form-control" id="policy_id">
+  </div>
+
+  <div class="form-group">
+    <label for="premium_amount">Premium Amount:</label>
+    <input [(ngModel)]="registeredpay.premium_amount" placeholder="Premium Amount" name="premium_amount" class="form-control" id="premium_amount">
+  </div>
+
+  <div class="form-group">
+    <label for="due_date">Due Date:</label>
+    <input type="date" [(ngModel)]="registeredpay.due_date" placeholder="Due Date" name="due_date" class="form-control" id="due_date">
+  </div>
+
+  <div class="form-group">
+    <label for="payment_date">Payment Date:</label>
+   <input type="date" [(ngModel)]="registeredpay.current_date" placeholder="Payment Date" name="payment_date" class="form-control" id="payment_date">
+  </div>
+
+  <div class="form-group">
+    <label for="payment_mode">Payment Mode:</label>
+   <input [(ngModel)]="registeredpay.payment_mode" placeholder="Payment Mode" name="payment_mode" class="form-control" id="payment_mode">
+  </div>
+
+  <div class="form-group">
+    <label for="amount_paid">Amount Paid:</label>
+   <input [(ngModel)]="registeredpay.amount_paid" placeholder="Amount Paid" name="amount_paid" class="form-control" id="amount_paid">
+  </div>
+
+  <button class="btn btn-success" (click)="makePayment()">Pay</button>
+
+</form>
+</div>
+</div>
+</div>
+-->

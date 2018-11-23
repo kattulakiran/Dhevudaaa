@@ -1,0 +1,59 @@
+<app-cancelpolicies-mainpage></app-cancelpolicies-mainpage>
+
+<div id="block" class="mt-5">
+
+  <div class="container1">
+
+      <header class="heading">Cancellation Details</header><hr>
+      <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body">
+
+            <table class="table table-responsive table-sm table-bordered ">
+
+ 
+  <tr>
+    <th>Customer Id</th>
+    <th>Policy Id</th>
+    <th>Vehicle Owner</th>
+    <th>Vehicle Registration State</th>
+    <th>Vehicle Type</th>
+    <th>Vehicle Class</th>
+    <th>Manufacturer</th>
+    <th>Model</th>
+    <th>Engine Number</th>
+    <th>Make Year</th>
+    <th>Regiistering Location</th>
+    <th>Date Of Purchase</th>
+    <th>Price</th>
+    <th>Premium Amount</th>
+    <th>Status</th>
+    
+  </tr>
+
+  <tr *ngFor="let vehicle of vehicles; let i=index;">
+    <td>{{vehicle.customer_id}}</td>
+    <td>{{vehicle.policy_id}}</td>
+    <td>{{vehicle.vehicle_owner}}</td>
+    <td>{{vehicle.vehicle_state}}</td>
+    <td>{{vehicle.vehicle_type}}</td>
+    <td>{{vehicle.vehicle_class}}</td>
+    <td>{{vehicle.manufacturer}}</td>
+    <td>{{vehicle.model}}</td>
+    <td>{{vehicle.engine_number}}</td>
+    <td>{{vehicle.make_year}}</td>
+    <td>{{vehicle.registering_location}}</td>
+    <td>{{vehicle.date_of_purchase}}</td>
+    <td>{{vehicle.price}}</td>
+    <td>{{vehicle.premium_amount}}</td>
+    <td *ngIf='!result && cancel.status!="approved"'><button class="btn btn-danger" (click)="cancelpolicies('delete', i)"  >Delete</button></td> 
+    <td *ngIf="cancel.status=='approved'">Approved</td>
+    <td *ngIf='result'><b> {{result=='delete'?'Deleted':'Rejected'}} </b></td>
+
+  </tr>
+ 
+</table>
+</div>
+</div>
+</div>
+</div>

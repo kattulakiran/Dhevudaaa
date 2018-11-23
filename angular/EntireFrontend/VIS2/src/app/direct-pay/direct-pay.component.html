@@ -1,0 +1,66 @@
+<app-user-mainpage></app-user-mainpage>
+
+<div id="block" class="container mt-5">
+
+  <form>
+        <div class="container1">
+          <!---heading-->
+              <header class="heading"> Direct Pay</header><hr>
+           <!---Form starting--> 
+           <div class="row">
+            <!--- For Policy Id-->
+               <div class="col-sm-12 mt-3">
+                      <div class="row justify-content-center">
+                    
+                        <div class="col-md-4"><label style="color: white" ><h5>*Policy Id :</h5></label> </div>
+                        <div class="col-md-4">
+                        <select [(ngModel)]="directpay.policy_id" name="policy_id" class="form-control ">
+                          <option value="null" disabled>--select policy--</option>
+                       <option [ngValue]="vehicle.policy_id" *ngFor='let vehicle of vehicles'>{{vehicle.policy_id}}</option>
+                     </select>
+                     </div>
+                   </div>
+              </div>  
+              
+              
+              
+
+               
+
+             
+  
+   <!--- For Payment Mode-->
+   <div class="col-sm-12 mt-3">
+      <div class="row justify-content-center">
+    
+        <div class="col-md-4"><label style="color: white" ><h5>*Payment Mode :</h5></label> </div>
+      <div class="col-md-4">
+          <select [(ngModel)]="directpay.pay_mode" name="pay_mode"  class="form-control ">
+              <option value="null" disabled>--Payment Mode--</option>
+              <option value="Debit Card">Debit Card</option>  
+              <option value="Credit Card">Credit Card</option>
+              <option value="Net Banking">Net Banking</option>
+              </select>
+      </div>
+   </div>
+</div>            
+
+
+
+
+<div class="container mt-3 mb-3">
+  <button type="submit" (click)="direct()" class=" btn btn-success btn-block">Pay</button>
+  <button type="reset" class="btn btn-danger btn-block">Reset</button>
+
+</div>
+
+
+
+
+
+
+</div>	 
+
+</div>
+</form>  
+</div>     
