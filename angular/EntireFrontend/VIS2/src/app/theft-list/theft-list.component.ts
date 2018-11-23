@@ -14,15 +14,18 @@ customer_id:string;
   constructor(private vs:VehicleService) { }
 
   theftlist(){
-    this.vs.theftlist(this.customer_id)
+    this.vs.theftlist(this.cid)
     .subscribe( data => {        
     this.thefts=data;
  
     });
     }
-
+get cid(){
+  return sessionStorage.getItem('cid');
+}
     ngOnInit() {
-      this.customer_id = null;
+      
+      this.theftlist();
      
   }
   onSubmit() {

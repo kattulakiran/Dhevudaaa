@@ -22,7 +22,7 @@ signup(){
 login(){
      this.vs.login(this.customer)
       .subscribe((data:Customer) => {
-        if(data)
+        if(data!=null)
         {
          sessionStorage.setItem('cid',<string>data.customer_id);
          console.log('login :'+sessionStorage.getItem('cid'))

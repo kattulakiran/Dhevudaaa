@@ -7,8 +7,21 @@ import { VehicleService } from '../vehicle.service';
   templateUrl: './cancel-add.component.html',
   styleUrls: ['./cancel-add.component.css']
 })
-export class CancelAddComponent {
+export class CancelAddComponent implements OnInit{
 cancel:Cancel=new Cancel();
+vehicles:any[];
+ngOnInit(){
+  this.vs.custpolicies(this.cid)
+        .subscribe( data => {        
+          if(data=='custId not found'){
+            alert("Invalid Customer Id");
+          }else{
+      this.vehicles = data;
+          }
+      },
+    
+  );
+}
   constructor(private vs:VehicleService) { }
 
   cancelcheck(){
@@ -18,8 +31,11 @@ cancel:Cancel=new Cancel();
     });
   }
 
-
+get cid(){
+  return sessionStorage.getItem('cid');
+}
   savecancel() {
+    this.cancel.customer_id=this.cid;
     this.vs.savecancel(this.cancel)
         .subscribe( data => {
           alert(data);

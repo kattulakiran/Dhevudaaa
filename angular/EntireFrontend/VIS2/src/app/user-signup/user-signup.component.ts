@@ -14,6 +14,7 @@ export class UserSignupComponent implements OnInit{
 
 customer:FormGroup;
 submit=false;
+  message: string;
 
 
  get f(){
@@ -32,11 +33,17 @@ userlogin(){
   }
 this.vs.userlogin(this.customer.value)
 .subscribe( data => {
-  
+ 
+  if(data=="Username already exists please try another Username")
+  {
+    return this.message=data;
+  }else{
+    this.message=null;
+    alert(data);
+    this.route.navigate(['user']);
+  }
 
-alert(data);
-  
-this.route.navigate(['user'])});
+});
 }
 
 
@@ -52,7 +59,7 @@ this.route.navigate(['user'])});
     address:['',Validators.required],
     city:['',Validators.required],
     pincode:['',Validators.required],
-    email:['',Validators.required],
+    email_id:['',Validators.required],
     gender:['',Validators.required],
     contact_number:['',Validators.required],
     date_of_birth:['',Validators.required]

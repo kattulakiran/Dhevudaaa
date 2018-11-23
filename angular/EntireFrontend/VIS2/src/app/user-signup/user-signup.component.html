@@ -126,7 +126,10 @@
         <div class="form-group">
                             <label style="color: oldlace" for="pincode"  class="col-sm-3 control-label">Pin Code*</label>
                             <div class="col-sm-9">
-                                <input type="text"  formControlName="pincode" placeholder="Pin Code" class="form-control" required>
+                                <input type="text"  formControlName="pincode" pattern="[0-9]{6}" placeholder="Pin Code" class="form-control" required>
+                                <div *ngIf="f.pincode.errors" >
+                                        <div *ngIf="f.pincode.errors&&!f.pincode.pristine" class="dinesh">pincode should contain 6 digits</div>
+                                    </div>
                             </div>
                         </div>                  
         
@@ -179,6 +182,10 @@
             <div class="col-sm-9 col-sm-offset-3">
                 <span style="color:aliceblue" class="help-block">*Required fields</span>
             </div>
+        </div>
+
+        <div>
+            <p style="color:yellow;text-align:center">{{message}}</p>
         </div>
        
         <button type="submit"  class="btn btn-success btn-block">Register</button>

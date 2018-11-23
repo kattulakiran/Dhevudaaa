@@ -12,7 +12,9 @@ accident:Accident=new Accident();
 accidents:Accident[];
 customer_id:string;
   constructor(private vs:VehicleService) { }
-
+get cid(){
+  return sessionStorage.getItem('cid');
+}
 
   accidentlist(){
     this.vs.accidentlist(this.customer_id)
@@ -21,9 +23,9 @@ customer_id:string;
     });
     }
     ngOnInit() {
-      this.customer_id = null;
-     
-  }
+      this.customer_id = this.cid;
+      this.accidentlist();
+  } 
 
     onSubmit() {
       this.accidentlist();

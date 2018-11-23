@@ -16,7 +16,7 @@ import com.vims.model.VehicleRegistration;
 @Repository
 public interface CustomerDao extends JpaRepository<Customer, String> {
 	
-	@Query(value=" from customer_registration cr where cr.username like %:username% and cr.password like %:password%" )
+	@Query(value=" from customer_registration cr where cr.username like :username and cr.password like :password" )
 	Customer findByCustomer(@Param("username") String username,@Param("password") String password);
 		
 	@Query("select cr.username from customer_registration cr")

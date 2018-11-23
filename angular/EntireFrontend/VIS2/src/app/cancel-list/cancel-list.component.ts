@@ -12,9 +12,11 @@ export class CancelListComponent implements OnInit {
   cancel:Cancel=new Cancel();
   cancels:Cancel[];
   constructor(private vs:VehicleService) {} 
-
+get cid(){
+  return sessionStorage.getItem('cid');
+}
   cancellist(){
-    this.vs.cancellist(this.customer_id)
+    this.vs.cancellist(this.cid)
     .subscribe( data => {        
     this.cancels=data;
  
@@ -27,7 +29,7 @@ export class CancelListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customer_id=null;
+    this.cancellist();
   }
 
 }

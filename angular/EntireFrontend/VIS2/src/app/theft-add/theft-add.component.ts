@@ -9,10 +9,13 @@ import {FormGroup,Validators,FormBuilder} from '@angular/forms';
 })
 export class TheftAddComponent implements OnInit {
 policy_id:string;
-  theft:FormGroup;
+  theft:FormGroup;vehicles:any[];
   constructor(private vs:VehicleService,private fb:FormBuilder) { }
 get f(){
   return this.theft.controls;
+}
+get cid(){
+  return sessionStorage.getItem('cid');
 }
   savetheft(){
     this.vs.savetheft(this.theft.value)
@@ -39,7 +42,14 @@ get f(){
     this.theftcheck();
   }
   ngOnInit(){
-   this.policy_id=null;
+    this.vs.custpolicies(this.cid)
+    .subscribe( data => {        
+      if(data=='custId not found'){
+        alert("Invalid Customer Id");
+      }else{
+  this.vehicles = data;
+      }
+  },);
    this.theft=this.fb.group({
     claim_id:[''],
     total_amount:[''],
@@ -48,7 +58,7 @@ get f(){
     fir_number:[''],
     claim_amount:[''],
     status:[''],
-    customer_id:[''],
+    customer_id:[this.cid],
     policy_id:[''],
    });
   }

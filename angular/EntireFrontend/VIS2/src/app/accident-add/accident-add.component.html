@@ -8,22 +8,7 @@
     <form [formGroup]="accident">
           <div class="container1">
 
-              <form [formGroup]="accident">
-                  <div class="">
-                      <div class="row justify-content-center">
-                    
-                        <div class="col-md-2 mt-4"><label style="color: white" ><h5>Policy Id:</h5></label> </div>
-                      <div class="mt-4">
-                          <input type="text" name="policy_id"formControlName="policy_id" placeholder="Enter your Policy Id" class="form-control " required>
-                      </div>
-                   </div>
-              </div>            
               
-             
-                <div class="btn-group mt-3">
-                  <button type="submit" (click)="accidentcheck()" class="btn btn-success">Submit</button>
-                </div>
-              </form>
 
 
             <!---heading-->
@@ -31,17 +16,7 @@
              <!---Form starting--> 
              <div class="row">
 
-              <!--- For Customer Id-->
-              <div class="col-sm-12">
-                  <div class="row justify-content-center">
-                
-                    <div class="col-md-4"><label style="color: white" ><h5>Customer Id :</h5></label> </div>
-                  <div class="col-md-4">
-                      <input type="text" formControlName="customer_id" name="customer_id"  placeholder="Customer Id" class="form-control " required>
-                  </div>
-               </div>
-          </div>  
-          
+
 
 
 
@@ -51,7 +26,10 @@
                       
                           <div class="col-md-4"><label style="color: white" ><h5>Policy Id :</h5></label> </div>
                         <div class="col-md-4">
-                            <input type="text"formControlName="policy_id" name="policy_id"  placeholder="Policy Id" class="form-control " required>
+                                <select formControlName="policy_id" name="policy_id" class="form-control ">
+                                        <option value="null" disabled>--select policy--</option>
+                                     <option [ngValue]="vehicle.policy_id" *ngFor='let vehicle of vehicles'>{{vehicle.policy_id}}</option>
+                                   </select>
                         </div>
                      </div>
                 </div>  
@@ -64,7 +42,7 @@
               
                   <div class="col-md-4"><label style="color: white" ><h5>Total Amount :</h5></label> </div>
                 <div class="col-md-4">
-                    <input type="text" formControlName="total_amount" name="total_amount"  placeholder="Total Amount" class="form-control " required>
+                    <input type="text" formControlName="total_amount" pattern="[0-9]{1,}" name="total_amount"  placeholder="Total Amount" class="form-control " required>
                     <div *ngIf="f.total_amount.errors" >
                         <div *ngIf="f.total_amount.errors&&!f.total_amount.pristine"
                          class="dinesh">total amount must contain only numbers </div>

@@ -71,7 +71,9 @@ public class Controller {
 		
 		Customer cid=custService.findByCustomer(c.getUsername(), c.getPassword());
 		
-		
+		if(cid==null){
+			return null;
+		}
 		return new ResponseEntity<Customer>(cid, HttpStatus.OK);
 	}
 	
