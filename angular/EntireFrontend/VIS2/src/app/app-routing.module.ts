@@ -30,6 +30,7 @@ import { AllcancelsListComponent } from './allcancels-list/allcancels-list.compo
 import { AllcancelsList2Component } from './allcancels-list2/allcancels-list2.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { VerifyGuard } from './verify.guard';
 
 
 const routes: Routes = [

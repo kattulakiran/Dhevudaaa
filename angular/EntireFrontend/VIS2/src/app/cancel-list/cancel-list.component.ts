@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cancel } from '../models/cancel';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cancel-list',
@@ -11,7 +12,7 @@ export class CancelListComponent implements OnInit {
   customer_id:string;
   cancel:Cancel=new Cancel();
   cancels:Cancel[];
-  constructor(private vs:VehicleService) {} 
+  constructor(private vs:VehicleService,private router:Router) {} 
 get cid(){
   return sessionStorage.getItem('cid');
 }
@@ -29,6 +30,10 @@ get cid(){
   }
 
   ngOnInit() {
+    if(sessionStorage.getItem('username')==null){
+
+      this.router.navigate(['']);
+    }
     this.cancellist();
   }
 

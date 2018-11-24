@@ -9,7 +9,7 @@
       <a class="nav-item nav-link active" [routerLink]="['/usermain']" >Pay Premium</a>
       <a class="nav-item nav-link" [routerLink]="['/claimpolicy']" >Claim Policy</a>
       <a class="nav-item nav-link" [routerLink]="['/cancelpolicy']">Cancel Policy</a>
-      <a class="nav-item nav-link" [routerLink]="['']">Logout</a>
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
      
     </div>
   </div>

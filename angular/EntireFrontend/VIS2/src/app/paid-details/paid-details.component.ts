@@ -17,6 +17,10 @@ directpay:Directpay=new Directpay();
   constructor(private route:Router,private vs:VehicleService) { }
 
   ngOnInit( ) {
+    if(sessionStorage.getItem('username')==null){
+
+      this.route.navigate(['']);
+    }
     this.directpay.policy_id=null;
    
     this.vs.custpolicies(this.cid)

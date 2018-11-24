@@ -33,8 +33,9 @@
 <td>{{theft.complaint_date}}</td>
 <td>{{theft.fir_number}}</td>  
 <td>{{theft.claim_amount}}</td> 
+
 <td *ngIf='!result && cancel.status!="approved"'><button class="btn btn-success" (click)="submit('approve', i)"  >Approve</button> <button class="btn btn-danger ml-4" (click)="submit2('reject', i)" >Reject</button></td> 
-<td *ngIf="cancel.status=='approved'">Approved</td>
+
 <td *ngIf='result'><b> {{result=='approve'?'Approved':'Rejected'}} </b></td>
 
 

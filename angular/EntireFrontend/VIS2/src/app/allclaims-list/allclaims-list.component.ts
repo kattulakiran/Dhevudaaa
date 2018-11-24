@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Accident } from '../models/accident';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-allclaims-list',
@@ -10,12 +11,15 @@ import { VehicleService } from '../vehicle.service';
 export class AllclaimsListComponent implements OnInit {
   accident:Accident=new Accident();
   accidents:Accident[];
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 
   result:string=null;
   claim_id:string;
   ngOnInit() {
+    if(sessionStorage.getItem('username')==null){
 
+      this.router.navigate(['']);
+    }
     this.vs.accidentpolicies()
     .subscribe( data => {        
       this.accidents = data;

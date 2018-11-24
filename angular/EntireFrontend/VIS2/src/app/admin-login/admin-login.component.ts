@@ -8,20 +8,24 @@ import { AdminLogin } from '../models/AdminLogin';
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.css']
 })
-export class AdminLoginComponent{
+export class AdminLoginComponent implements OnInit{
 message:string;
   adlogin:AdminLogin=new AdminLogin();
 
-  
+  ngOnInit(){
+ 
+  }
   constructor(private router: Router,private vs:VehicleService) { }
 
-  tryLogin():void {
+  tryLogin() {
     this.vs.tryLogin(this.adlogin)
       .subscribe(data => {
         if(data=='login successful')
         {
-          
-          this.router.navigateByUrl('vehiclereg');}
+          sessionStorage.setItem('username','admin');
+         console.log(data);
+          this.router.navigate(['vehiclereg']);
+        }
           else{
             this.message="Invalid Credentials";
           }

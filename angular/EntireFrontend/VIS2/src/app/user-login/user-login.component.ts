@@ -24,10 +24,16 @@ login(){
       .subscribe((data:Customer) => {
         if(data!=null)
         {
+          this.vs.loggedInStatus=true;
+          sessionStorage.setItem('username',<string>data.username);
+          sessionStorage.setItem('password',<string>data.password);
          sessionStorage.setItem('cid',<string>data.customer_id);
          console.log('login :'+sessionStorage.getItem('cid'))
+         console.log(this.vs.loggedInStatus);
           this.route.navigate(['usermain']);}
           else{
+            this.vs.loggedInStatus=false;
+            console.log(this.vs.loggedInStatus);
            this.message="Invalid Credentials";
 
          

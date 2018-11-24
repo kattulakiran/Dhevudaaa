@@ -4,6 +4,7 @@ import { Theft } from '../models/theft';
 import { Accident } from '../models/accident';
 import {FormGroup,Validators,FormBuilder} from '@angular/forms';
 import {Vehicle} from './../models/vehicle'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-accident-add',
   templateUrl: './accident-add.component.html',
@@ -16,7 +17,7 @@ vehicles:any[];
 vehicle:Vehicle;
 accident:FormGroup;
 accidents:Accident[];
-  constructor(private vs:VehicleService,private fb:FormBuilder) { }
+  constructor(private vs:VehicleService,private fb:FormBuilder,private router:Router) { }
 get  f(){
   return this.accident.controls;
 }
@@ -54,6 +55,10 @@ onSubmit() {
 
 }
 ngOnInit(){
+  if(sessionStorage.getItem('username')==null){
+
+    this.router.navigate(['']);
+  }
   this.vs.custpolicies(this.cid)
         .subscribe( data => {        
           if(data=='custId not found'){

@@ -13,6 +13,10 @@ import {FormGroup,Validators,FormBuilder} from '@angular/forms';
 export class AddVehicleComponent implements OnInit{
   vehicle:FormGroup;
 ngOnInit(){
+  if(sessionStorage.getItem('username')==null){
+
+    this.router.navigate(['']);
+  }
   this.vehicle=this.fb.group({
     policy_id: [] ,
     vehicle_owner:[''],

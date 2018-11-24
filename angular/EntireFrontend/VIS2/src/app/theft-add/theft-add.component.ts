@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Theft } from '../models/theft';
 import { VehicleService } from '../vehicle.service';
 import {FormGroup,Validators,FormBuilder} from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-theft-add',
   templateUrl: './theft-add.component.html',
@@ -10,7 +11,7 @@ import {FormGroup,Validators,FormBuilder} from '@angular/forms';
 export class TheftAddComponent implements OnInit {
 policy_id:string;
   theft:FormGroup;vehicles:any[];
-  constructor(private vs:VehicleService,private fb:FormBuilder) { }
+  constructor(private vs:VehicleService,private router:Router,private fb:FormBuilder) { }
 get f(){
   return this.theft.controls;
 }
@@ -42,6 +43,10 @@ get cid(){
     this.theftcheck();
   }
   ngOnInit(){
+    if(sessionStorage.getItem('username')==null){
+
+      this.router.navigate(['']);
+    }
     this.vs.custpolicies(this.cid)
     .subscribe( data => {        
       if(data=='custId not found'){

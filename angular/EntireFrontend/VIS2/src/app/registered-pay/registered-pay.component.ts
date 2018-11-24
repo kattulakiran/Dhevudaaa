@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Registerpay } from '../models/registerpay';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registered-pay',
@@ -16,10 +17,14 @@ export class RegisteredPayComponent  {
   vehicles: any;
   message: string;
 
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 
 
   ngOnInit( ) {
+    if(sessionStorage.getItem('username')==null){
+
+      this.router.navigate(['']);
+    }
     this.regpay.policy_id=null;
     console.log(this.cid)
     this.vs.custpolicies(this.cid)

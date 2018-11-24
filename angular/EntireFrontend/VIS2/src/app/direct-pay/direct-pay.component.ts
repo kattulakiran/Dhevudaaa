@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Directpay } from '../models/directpay';
 import { VehicleService } from '../vehicle.service';
 import { Vehicle } from '../models/vehicle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-direct-pay',
@@ -13,11 +14,14 @@ export class DirectPayComponent{
   vehicles: any;
   vehicle:Vehicle=new Vehicle();
   
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 
   
   ngOnInit( ) {
-    this.directpay.policy_id=null;
+    if(sessionStorage.getItem('username')==null){
+
+      this.router.navigate(['']);
+    }
     console.log(this.cid)
     this.vs.custpolicies(this.cid)
         .subscribe( data => {        

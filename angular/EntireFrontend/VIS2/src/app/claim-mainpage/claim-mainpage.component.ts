@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { VehicleService } from '../vehicle.service';
 
 @Component({
   selector: 'app-claim-mainpage',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
 })
 export class ClaimMainpageComponent implements OnInit {
 
-  constructor(private route:Router) { }
+  constructor(private route:Router,private vs:VehicleService) { }
 
   ngOnInit() {
+    if(sessionStorage.getItem('username')==null){
+
+      this.route.navigate(['']);
+    }
   }
 
   accident(){
@@ -32,6 +37,12 @@ export class ClaimMainpageComponent implements OnInit {
 
 
 
+  logout(){
+    this.vs.loggedInStatus=false;
+    console.log(this.vs.loggedInStatus);
+    sessionStorage.clear();
+    this.route.navigate(['']);
+  }
 
 
 

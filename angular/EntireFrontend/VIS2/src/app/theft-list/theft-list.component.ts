@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Theft } from '../models/theft';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-theft-list',
@@ -11,7 +12,7 @@ export class TheftListComponent implements OnInit{
 theft:Theft=new Theft();
 thefts:Theft[];
 customer_id:string;
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 
   theftlist(){
     this.vs.theftlist(this.cid)
@@ -24,6 +25,10 @@ get cid(){
   return sessionStorage.getItem('cid');
 }
     ngOnInit() {
+      if(sessionStorage.getItem('username')==null){
+
+        this.router.navigate(['']);
+      }
       
       this.theftlist();
      

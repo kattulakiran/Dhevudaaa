@@ -71,10 +71,18 @@ public class Controller {
 		
 		Customer cid=custService.findByCustomer(c.getUsername(), c.getPassword());
 		
-		if(cid==null){
-			return null;
-		}
 		return new ResponseEntity<Customer>(cid, HttpStatus.OK);
+	}
+	@PostMapping(value = "/customer/login2")
+	public ResponseEntity<?> loginCustomer2(@RequestBody Customer c) {
+		
+		Customer cid=custService.findByCustomer(c.getUsername(), c.getPassword());
+		Boolean flag;
+		if(cid==null){
+			flag=false;
+		}
+		else flag=true;
+		return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
 	}
 	
 	

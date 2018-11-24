@@ -32,6 +32,7 @@
 <td>{{accident.accident_type}}</td>
 <td>{{accident.weightage}}</td>
 <td>{{accident.claim_amount}}</td>  
+
 <td *ngIf='!result && accident.status!="approved"'><button class="btn btn-success" (click)="Accidentsubmit('approve', i)">Approve</button> <button class="btn btn-danger ml-4" (click)="Accidentsubmit2('reject', i)" >Reject</button></td> 
 <td *ngIf="accident.status=='approved'">Approved</td>
 <td *ngIf='result'><b> {{result=='approve'?'Approved':'Rejected'}} </b></td>

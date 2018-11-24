@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from '../models/customer';
+import { VehicleService } from '../vehicle.service';
 
 @Component({
   selector: 'app-user-mainpage',
@@ -9,7 +10,7 @@ import { Customer } from '../models/customer';
 })
 export class UserMainpageComponent implements OnInit {
 customer : Customer=new Customer();
-  constructor(private route:Router) { }
+  constructor(private route:Router,private vs:VehicleService) { }
 
 directpay(){
 this.route.navigate(['directpay']);
@@ -32,10 +33,12 @@ policylist(){
 }
 
 
-
-
-
-
+logout(){
+  this.vs.loggedInStatus=false;
+  console.log(this.vs.loggedInStatus);
+  sessionStorage.clear();
+  this.route.navigate(['']);
+}
 
 
   ngOnInit() {

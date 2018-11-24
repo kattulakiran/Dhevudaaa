@@ -15,13 +15,15 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
 
   constructor(private http: HttpClient) { }
+
+   
+   loggedInStatus=false;
 
 //  admin login
   public tryLogin(adlogin){

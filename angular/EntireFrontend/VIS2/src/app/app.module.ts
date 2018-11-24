@@ -38,7 +38,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { FooterComponent } from './footer/footer.component';
-
+import {VerifyGuard} from './verify.guard';
 
 @NgModule({
   declarations: [
@@ -83,7 +83,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,  ReactiveFormsModule,
  
   ],
-  providers: [VehicleService],
+  providers: [VehicleService,VerifyGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

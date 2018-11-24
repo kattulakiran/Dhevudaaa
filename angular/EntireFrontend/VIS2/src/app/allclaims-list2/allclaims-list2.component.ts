@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Theft } from '../models/theft';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-allclaims-list2',
@@ -10,13 +11,16 @@ import { VehicleService } from '../vehicle.service';
 export class AllclaimsList2Component implements OnInit {
 theft:Theft=new Theft();
 thefts:Theft[];
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 
 
 result:string=null;
 claim_id:string;
   ngOnInit() {
+    if(sessionStorage.getItem('username')==null){
 
+      this.router.navigate(['']);
+    }
     this.vs.theftpolicies()
     .subscribe( data => {        
       this.thefts = data;

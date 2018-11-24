@@ -17,7 +17,9 @@ export class VehicleListComponent implements OnInit {
       constructor(private router: Router, private vs: VehicleService) { }
     
       ngOnInit() {
-    
+    if(sessionStorage.getItem('username')==null){
+      this.router.navigate(['']);
+    }
         this.vs.getPolicies()
           .subscribe( data => {        
             this.vehicles = data;

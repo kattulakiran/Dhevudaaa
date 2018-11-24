@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cancel } from '../models/cancel';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-allcancels-list',
@@ -12,10 +13,14 @@ cancel:Cancel=new Cancel();
 cancels:Cancel[];
 cancel_id:string;
   result:string=null;
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 
   ngOnInit() {
 
+    if(sessionStorage.getItem('username')==null){
+
+      this.router.navigate(['']);
+    }
     this.vs.cancelpolicy()
     .subscribe( data => {        
       this.cancels = data;

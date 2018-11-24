@@ -11,6 +11,13 @@ export class VehicleRegComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit() {
+    if(sessionStorage.getItem('username')==null){
+      this.route.navigate(['']);
+
+    }
+      console.log(sessionStorage.getItem('username'))
+
+     
   }
 
 
@@ -24,6 +31,9 @@ export class VehicleRegComponent implements OnInit {
   }
   updatepolicy(){
   this.route.navigate(['updatepolicies']);
+}
+logout(){
+  sessionStorage.clear();this.route.navigate(['']);
 }
 
 }

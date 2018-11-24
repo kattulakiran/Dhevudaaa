@@ -11,6 +11,10 @@ export class CancelpoliciesMainpageComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit() {
+    if(sessionStorage.getItem('username')==null){
+
+      this.route.navigate(['']);
+    }
   }
 
   cancelapolicy(){
@@ -37,7 +41,9 @@ export class CancelpoliciesMainpageComponent implements OnInit {
     this.route.navigate(['cancelpolicies']);
   }
 
-
+logout(){
+  sessionStorage.clear();this.route.navigate(['']);
+}
 
 
 }

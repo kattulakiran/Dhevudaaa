@@ -10,7 +10,7 @@
         <a class="nav-item nav-link" [routerLink]="['/vehiclereg']" >Vehicle Registration</a>
         <a class="nav-item nav-link active" [routerLink]="['/claims']" >Claims</a>
         <a class="nav-item nav-link" [routerLink]="['/cancelpolicies']" >Cancel Policy</a>
-        <a class="nav-item nav-link" [routerLink]="['']">Logout</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
        
       </div>
     </div>

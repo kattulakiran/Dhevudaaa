@@ -16,6 +16,10 @@ export class RegPaiddetailsComponent implements OnInit {
   constructor(private route:Router,private vs:VehicleService) { }
 
   ngOnInit( ) {
+    if(sessionStorage.getItem('username')==null){
+
+      this.route.navigate(['']);
+    }
     this.regpay.policy_id=null;
    
     this.vs.custpolicies(this.cid)

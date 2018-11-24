@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cancel } from '../models/cancel';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cancel-add',
@@ -11,6 +12,10 @@ export class CancelAddComponent implements OnInit{
 cancel:Cancel=new Cancel();
 vehicles:any[];
 ngOnInit(){
+  if(sessionStorage.getItem('username')==null){
+
+    this.router.navigate(['']);
+  }
   this.vs.custpolicies(this.cid)
         .subscribe( data => {        
           if(data=='custId not found'){
@@ -22,7 +27,7 @@ ngOnInit(){
     
   );
 }
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 
   cancelcheck(){
     this.vs.cancelcheck(this.cancel)

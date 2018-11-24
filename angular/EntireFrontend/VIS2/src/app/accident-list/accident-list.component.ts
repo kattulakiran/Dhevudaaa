@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Accident } from '../models/accident';
 import { VehicleService } from '../vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accident-list',
@@ -11,7 +12,7 @@ export class AccidentListComponent implements OnInit {
 accident:Accident=new Accident();
 accidents:Accident[];
 customer_id:string;
-  constructor(private vs:VehicleService) { }
+  constructor(private vs:VehicleService,private router:Router) { }
 get cid(){
   return sessionStorage.getItem('cid');
 }
@@ -23,6 +24,10 @@ get cid(){
     });
     }
     ngOnInit() {
+      if(sessionStorage.getItem('username')==null){
+
+        this.router.navigate(['']);
+      }
       this.customer_id = this.cid;
       this.accidentlist();
   } 

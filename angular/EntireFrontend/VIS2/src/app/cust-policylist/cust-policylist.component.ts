@@ -17,6 +17,10 @@ export class CustPolicylistComponent implements OnInit {
   constructor(private route:Router,private vs:VehicleService) { }
 
   ngOnInit( ) {
+    if(sessionStorage.getItem('username')==null){
+
+      this.route.navigate(['']);
+    }
     console.log(this.cid)
     this.vs.custpolicies(this.cid)
         .subscribe( data => {        
