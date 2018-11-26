@@ -30,7 +30,7 @@
                 <th>Premium Amount</th>
         
               </tr>
-              <tr *ngFor="let vehicle of vehicles">
+              <tr *ngFor="let vehicle of vehicles | paginate: {itemsPerPage:5, currentPage:p}">
                 <td>{{vehicle.customer_id}}</td>
                 <td>{{vehicle.policy_id}}</td>
                 <td>{{vehicle.vehicle_owner}}</td>
@@ -48,6 +48,7 @@
               </tr>
             
               </table>
+              <pagination-controls (pageChange)="p =$event"></pagination-controls>
             
             </div>
             

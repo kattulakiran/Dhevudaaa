@@ -29,13 +29,25 @@ claim_id:string;
 }
 submit(result,i){
   this.result=result;
-  this.vs.setStatus(this.thefts[i].claim_id).subscribe(res=>{});
+  this.vs.setStatus(this.thefts[i].claim_id).subscribe(res=>{
+    this.vs.theftpolicies()
+    .subscribe( data => {        
+      this.thefts = data;
+      
+    });
+  });
  
 }
 
 submit2(result,i){
   this.result=result;
-  this.vs.setStatus2(this.thefts[i].claim_id).subscribe(res=>{});
+  this.vs.setStatus2(this.thefts[i].claim_id).subscribe(res=>{
+    this.vs.theftpolicies()
+    .subscribe( data => {        
+      this.thefts = data;
+      
+    });
+  });
  
 }
 

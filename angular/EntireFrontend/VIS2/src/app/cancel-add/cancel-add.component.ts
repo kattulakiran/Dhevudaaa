@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cancel-add.component.css']
 })
 export class CancelAddComponent implements OnInit{
-cancel:Cancel=new Cancel();
+cancel:Cancel=new Cancel();message:string;
 vehicles:any[];
 ngOnInit(){
   if(sessionStorage.getItem('username')==null){
@@ -43,7 +43,8 @@ get cid(){
     this.cancel.customer_id=this.cid;
     this.vs.savecancel(this.cancel)
         .subscribe( data => {
-          alert(data);
+          //alert(data);
+          this.message=data;
         });
   
   }

@@ -24,7 +24,7 @@
 <th>Status</th>
 </tr>
 
-<tr *ngFor="let theft of thefts; let i=index;">
+<tr *ngFor="let theft of thefts  | paginate: {itemsPerPage:5, currentPage:p}; let i=index;">
 <td>{{theft.customer_id}}</td>
 <td>{{theft.policy_id}}</td>
 <td>{{theft.claim_id}}</td>
@@ -34,15 +34,17 @@
 <td>{{theft.fir_number}}</td>  
 <td>{{theft.claim_amount}}</td> 
 
-<td *ngIf='!result && cancel.status!="approved"'><button class="btn btn-success" (click)="submit('approve', i)"  >Approve</button> <button class="btn btn-danger ml-4" (click)="submit2('reject', i)" >Reject</button></td> 
+<td *ngIf='theft.status!="approved"&&theft.status!="rejected"'><button class="btn btn-success" (click)="submit('approve', i)"  >Approve</button> <button class="btn btn-danger ml-4" (click)="submit2('reject', i)" >Reject</button></td> 
 
-<td *ngIf='result'><b> {{result=='approve'?'Approved':'Rejected'}} </b></td>
+<td *ngIf="theft.status=='approved'">Approved</td>
+<td *ngIf="theft.status=='rejected'">Rejected</td>
 
 
 
 </tr>
 
 </table>
+<pagination-controls (pageChange)="p =$event"></pagination-controls>
 </div>
 </div>
 </div>

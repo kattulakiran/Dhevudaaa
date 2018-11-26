@@ -174,8 +174,8 @@ accidentsetStatus2(claim_id:string):Observable<any>{
   return this.http.get('http://10.230.166.68:1216/vims/accidentclaim/reject/'+claim_id,{ responseType: 'text' as 'text'});
 }
 // cancel req set status
-cancelreqsetStatus(cancel_id:string):Observable<any>{
-  return this.http.get('http://10.230.166.68:1216/vims/cancel/approve/'+cancel_id,{ responseType: 'text' as 'text'});
+cancelreqsetStatus(policy_id:string):Observable<any>{
+  return this.http.get('http://10.230.166.68:1216/vims/cancel/approve/'+policy_id,{ responseType: 'text' as 'text'});
 }
 // cancel policy set status
 cancelpolicyStatus(policy_id:string):Observable<any>{

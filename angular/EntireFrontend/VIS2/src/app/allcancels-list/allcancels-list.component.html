@@ -24,7 +24,7 @@
     <th>Status</th>
   </tr>
 
-  <tr *ngFor="let cancel of cancels; let i=index;">
+  <tr *ngFor="let cancel of cancels | paginate: {itemsPerPage:5, currentPage:p} ; let i=index; ">
     <td>{{cancel.customer_id}}</td>
     <td>{{cancel.policy_id}}</td>
     <td>{{cancel.cancel_id}}</td> 
@@ -34,14 +34,16 @@
     <td>{{cancel.cancel_date}}</td>  
     <td>{{cancel.withdraw_amount}}</td> 
     
-    <td *ngIf='!result  && cancel.status!="approved"'>
+    <td *ngIf=' cancel.status!="approved"&&cancel.status!="rejected"'>
       <button class="btn btn-danger" (click)="cancelrequests('delete', i)"  >Delete</button></td> 
-    <td *ngIf="cancel.status=='approved'">Approved</td>
-    <td *ngIf='result'><b> {{result=='delete'?'Deleted':'Rejected'}} </b></td>
+   <td *ngIf="cancel.status=='approved'">Approved</td>
+   <td *ngIf="cancel.status=='rejected'">Rejected</td>
+   <!-- <td *ngIf='result'><b> {{result=='delete'?'Deleted':'Rejected'}} </b></td>-->
 
   </tr>
  
 </table>
+<pagination-controls (pageChange)="p =$event"></pagination-controls>
 </div>
 </div>
 </div>

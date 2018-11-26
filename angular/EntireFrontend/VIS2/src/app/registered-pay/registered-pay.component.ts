@@ -16,6 +16,7 @@ export class RegisteredPayComponent  {
   regpay:Registerpay=new Registerpay();
   vehicles: any;
   message: string;
+  message1:string;
 
   constructor(private vs:VehicleService,private router:Router) { }
 
@@ -55,8 +56,8 @@ makePayment() {
   this.vs.makePayment(this.regpay)
       .subscribe( data => {
       
-      
-        this.message=data;
+        this.message=null;
+        this.message1=data;
      
      
       });

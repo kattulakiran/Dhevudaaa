@@ -11,7 +11,7 @@ import {FormGroup,Validators,FormBuilder} from '@angular/forms';
   styleUrls: ['./add-vehicle.component.css']
 })
 export class AddVehicleComponent implements OnInit{
-  vehicle:FormGroup;
+  vehicle:FormGroup;message:string;
 ngOnInit(){
   if(sessionStorage.getItem('username')==null){
 
@@ -46,8 +46,8 @@ get f(){
     }
     this.vs.createPolicy(this.vehicle.value)
         .subscribe( data => {
-        alert(data);
-          
+        //alert(data);
+          this.message=data;
         });
 
   };

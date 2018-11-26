@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DirectPayComponent{
   directpay:Directpay=new Directpay();
-  vehicles: any;
+  vehicles: any;message:string;
   vehicle:Vehicle=new Vehicle();
   
   constructor(private vs:VehicleService,private router:Router) { }
@@ -42,7 +42,8 @@ get cid(){
  direct(){
    this.vs.direct(this.directpay)
    .subscribe( data => {
-    alert(data);
+    //alert(data);
+    this.message=data;
    });
  }
 

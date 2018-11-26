@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AllcancelsListComponent implements OnInit {
 cancel:Cancel=new Cancel();
 cancels:Cancel[];
-cancel_id:string;
+policy_id:string;
   result:string=null;
   constructor(private vs:VehicleService,private router:Router) { }
 
@@ -32,7 +32,11 @@ cancel_id:string;
 
   cancelrequests(result,i){
     this.result=result;
-    this.vs.cancelreqsetStatus(this.cancels[i].cancel_id).subscribe(res=>{});
+    this.vs.cancelreqsetStatus(this.cancels[i].policy_id).subscribe(res=>{ this.vs.cancelpolicy()
+      .subscribe( data => {        
+        this.cancels = data;
+        
+      });});
    
   }
 

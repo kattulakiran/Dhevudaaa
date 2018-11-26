@@ -34,7 +34,13 @@ result:string=null;
 
   cancelpolicies(result,i){
     this.result=result;
-    this.vs.cancelpolicyStatus(this.vehicles[i].policy_id).subscribe(res=>{});
+    this.vs.cancelpolicyStatus(this.vehicles[i].policy_id).subscribe(res=>{
+      this.vs.cancelreqpolicy()
+    .subscribe( data => {         
+      this.vehicles = data;
+      
+    });
+    });
    
   }
 

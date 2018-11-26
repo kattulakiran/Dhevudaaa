@@ -16,6 +16,7 @@ export class AllclaimsListComponent implements OnInit {
   result:string=null;
   claim_id:string;
   ngOnInit() {
+    console.log('allclaims');
     if(sessionStorage.getItem('username')==null){
 
       this.router.navigate(['']);
@@ -29,13 +30,35 @@ export class AllclaimsListComponent implements OnInit {
 
 Accidentsubmit(result,i){
   this.result=result;
-  this.vs.accidentsetStatus(this.accidents[i].claim_id).subscribe(res=>{});
+  this.vs.accidentsetStatus(this.accidents[i].claim_id).subscribe(res=>{
+    this.vs.accidentpolicies()
+    .subscribe( data => {        
+      this.accidents = data;
+  
+     // this.accidents=data;
+      // this.router.navigate(['accidentclaimslist']);
+    });
+  });
+  // this.router.navigate(['accidentclaimslist']);
+  this.vs.accidentpolicies()
+  .subscribe( data => {        
+    this.accidents = data;
+
+   // this.accidents=data;
+    // this.router.navigate(['accidentclaimslist']);
+  });
  
 }
 
 Accidentsubmit2(result,i){
   this.result=result;
-  this.vs.accidentsetStatus2(this.accidents[i].claim_id).subscribe(res=>{});
+  this.vs.accidentsetStatus2(this.accidents[i].claim_id).subscribe(res=>{  this.vs.accidentpolicies()
+    .subscribe( data => {        
+      this.accidents = data;
+  
+     // this.accidents=data;
+      // this.router.navigate(['accidentclaimslist']);
+    });});
  
 }
 

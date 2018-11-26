@@ -39,6 +39,9 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { FooterComponent } from './footer/footer.component';
 import {VerifyGuard} from './verify.guard';
+import { AlertsModule } from 'angular-alert-module';
+import { CancelsampleComponent } from './cancelsample/cancelsample.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -74,13 +77,15 @@ import {VerifyGuard} from './verify.guard';
     ContactusComponent,
     AboutusComponent,
     FooterComponent,
+    CancelsampleComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,  ReactiveFormsModule,
+    FormsModule,  ReactiveFormsModule,AlertsModule.forRoot(),
+    NgxPaginationModule
  
   ],
   providers: [VehicleService,VerifyGuard],

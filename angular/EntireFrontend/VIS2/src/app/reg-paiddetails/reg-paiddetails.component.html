@@ -55,7 +55,7 @@
       
       </tr>
     
-      <tr *ngFor="let regpay of regpays">
+      <tr *ngFor="let regpay of regpays | paginate: {itemsPerPage:5, currentPage:p}">
         <td>{{regpay.policy_id}}</td>
         <td>{{regpay.payment_id}}</td>
         <td>{{regpay.premium_amount}}</td>
@@ -68,6 +68,7 @@
       </tr>
      
     </table>
+    <pagination-controls (pageChange)="p =$event"></pagination-controls>
     </div>
     </div>
     </div>

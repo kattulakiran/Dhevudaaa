@@ -573,6 +573,9 @@ public class Controller {
 		c.set(2000, 01, 01);
 		max=c.getTime();
 		
+		if(l1.size()==0&&l2.size()==0){
+			return new ResponseEntity<String>("Please proceed to Direct Pay as there is no penalty.", HttpStatus.OK);
+		}
 		RegisteredPay pay=new RegisteredPay();
 		Date d=new Date();
 		pay.setPaid_date(d);
@@ -1594,7 +1597,7 @@ public class Controller {
 		c1.set(2000, 01, 01);
 		max=c1.getTime();
 		Date lastpaiddate=c1.getTime();
-		//System.out.println("line1");
+		System.out.println("line1");
 		double directamount=0;
 				if(l1.size()==0){
 					max=l2.get(0).getDue_date();
@@ -1639,7 +1642,7 @@ public class Controller {
 
 //
 				
-				//System.out.println("line2");
+				System.out.println("line2");
 	       s1=max;
 	       can.setLast_paid_date(lastpaiddate);
 	       Date s3=null;Date min=new Date();
@@ -1675,7 +1678,7 @@ public class Controller {
 					}
 			}
 	}
-	      // System.out.println("line3");
+	       System.out.println("line3");
 	       s3=min;
 	       can.setLast_paid_date(lastpaiddate);
 	       can.setRegistered_date(s3);
@@ -1699,7 +1702,7 @@ public class Controller {
 	       int mont2=cal1.get(Calendar.MONTH);
 	       int yea2=cal1.get(Calendar.YEAR);
 	       int m=((yea2-yea1)*12)+(mont2-mont1);
-	       //System.out.println("line4");
+	       System.out.println("line4");
 	       if(n>3){
 	    	   if(n>9){
 	    		   String s=can.getTotal_amount();
@@ -1751,13 +1754,16 @@ public class Controller {
 	       }
 	       can.setCustomer_id(v.getCustomer_id());
 	       can.setPolicy_id(v.getPolicy_id());
-	       can.setStatus("approved");
+	       
 	       
 	       List<Cancellation> cancellist=vehicleService.getCancellationDetails(policy_id);
-	       if(cancellist.size()!=0){
-	    	   return new ResponseEntity<String>("You have already cancelled this policy ", HttpStatus.OK);
-	       }
-	       //System.out.println("line5");
+	      if(cancellist.size()!=0){
+	    	  if(cancellist.get(0).getStatus().equalsIgnoreCase("processing")){
+	    		  can=cancellist.get(0);
+	    	  }
+	      }
+	      can.setStatus("approved");
+	       System.out.println("line5");
 	       can=cancelservice.save(can);
 	       
 		if(can==null) {

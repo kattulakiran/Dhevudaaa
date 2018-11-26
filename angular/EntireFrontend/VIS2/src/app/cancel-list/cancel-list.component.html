@@ -31,7 +31,7 @@
       <th>Status</th>
     </tr>
   
-    <tr *ngFor="let cancel of cancels">
+    <tr *ngFor="let cancel of cancels  | paginate: {itemsPerPage:5, currentPage:p}">
       <td>{{cancel.customer_id}}</td>
       <td>{{cancel.policy_id}}</td>
       <td>{{cancel.cancel_id}}</td>
@@ -45,6 +45,7 @@
     </tr>
    
   </table>
+  <pagination-controls (pageChange)="p =$event"></pagination-controls>
   </div>
   </div>
   </div>

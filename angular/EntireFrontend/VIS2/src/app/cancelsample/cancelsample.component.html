@@ -1,0 +1,17 @@
+<tr>
+<td>{{cancel.customer_id}}</td>
+<td>{{cancel.policy_id}}</td>
+<td>{{cancel.cancel_id}}</td>
+<td>{{cancel.total_amount}}</td>
+<td>{{cancel.registered_date}}</td>
+<td>{{cancel.last_paid_date}}</td>
+<td>{{cancel.cancel_date}}</td>
+<td>{{cancel.withdraw_amount}}</td>
+<td *ngIf='!result  && cancel.status!="approved"'>
+  <button class="btn btn-danger" (click)="cancelrequests('delete', i)">Delete</button>
+  <span *ngIf="cancel.status=='approved'">Approved</span>
+  <span *ngIf='result'>
+    <b> {{result=='delete'?'Deleted':'Rejected'}} </b>
+  </span>
+</td>
+</tr>

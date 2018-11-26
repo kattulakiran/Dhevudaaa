@@ -31,7 +31,7 @@
     
   </tr>
 
-  <tr *ngFor="let vehicle of vehicles; let i=index;">
+  <tr *ngFor="let vehicle of vehicles | paginate: {itemsPerPage:5, currentPage:p}; let i=index;">
     <td>{{vehicle.customer_id}}</td>
     <td>{{vehicle.policy_id}}</td>
     <td>{{vehicle.vehicle_owner}}</td>
@@ -46,13 +46,15 @@
     <td>{{vehicle.date_of_purchase}}</td>
     <td>{{vehicle.price}}</td>
     <td>{{vehicle.premium_amount}}</td>
-    <td *ngIf='!result && cancel.status!="approved"'><button class="btn btn-danger" (click)="cancelpolicies('delete', i)"  >Delete</button></td> 
+    <td *ngIf='  cancel.status!="approved"&&cancel.status!="rejected"'><button class="btn btn-danger" (click)="cancelpolicies('delete', i)"  >Delete</button></td> 
     <td *ngIf="cancel.status=='approved'">Approved</td>
-    <td *ngIf='result'><b> {{result=='delete'?'Deleted':'Rejected'}} </b></td>
+    <td *ngIf="cancel.status=='rejected'">Rejected</td>
+   <!-- <td *ngIf='result'><b> {{result=='delete'?'Deleted':'Rejected'}} </b></td>-->
 
   </tr>
  
 </table>
+<pagination-controls (pageChange)="p =$event"></pagination-controls>
 </div>
 </div>
 </div>

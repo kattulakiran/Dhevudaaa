@@ -15,6 +15,7 @@ export class UserSignupComponent implements OnInit{
 customer:FormGroup;
 submit=false;
   message: string;
+  message1:string;
 
 
  get f(){
@@ -38,9 +39,10 @@ this.vs.userlogin(this.customer.value)
   {
     return this.message=data;
   }else{
-    this.message=null;
-    alert(data);
-    this.route.navigate(['user']);
+   
+    this.message=data;
+    
+    
   }
 
 });
@@ -66,8 +68,7 @@ this.vs.userlogin(this.customer.value)
 
   
   });
-   console.log(this.customer)
-  console.log(this.f)
+  
  }
 
 }

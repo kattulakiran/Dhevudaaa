@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./theft-add.component.css']
 })
 export class TheftAddComponent implements OnInit {
-policy_id:string;
+policy_id:string;message:string;
   theft:FormGroup;vehicles:any[];
   constructor(private vs:VehicleService,private router:Router,private fb:FormBuilder) { }
 get f(){
@@ -25,8 +25,8 @@ get cid(){
 
               return;
             }
-          alert(data);
-            
+         // alert(data);
+            this.message=data;
           });
   
     }

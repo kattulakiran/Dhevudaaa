@@ -33,7 +33,7 @@
         <th>Status</th>
       </tr>
     
-      <tr *ngFor="let theft of thefts">
+      <tr *ngFor="let theft of thefts | paginate: {itemsPerPage:5, currentPage:p}">
         <td>{{theft.customer_id}}</td>
         <td>{{theft.policy_id}}</td>
         <td>{{theft.claim_id}}</td>
@@ -47,6 +47,7 @@
       </tr>
      
     </table>
+    <pagination-controls (pageChange)="p =$event"></pagination-controls>
     </div>
     </div>
     </div>

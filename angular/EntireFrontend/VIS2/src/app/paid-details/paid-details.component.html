@@ -54,7 +54,7 @@
       
       </tr>
     
-      <tr *ngFor="let directpay of directpays">
+      <tr *ngFor="let directpay of directpays | paginate: {itemsPerPage:5, currentPage:p}">
         <td>{{directpay.policy_id}}</td>
         <td>{{directpay.payment_id}}</td>
         <td>{{directpay.premium_amount}}</td>
@@ -67,6 +67,7 @@
       </tr>
      
     </table>
+    <pagination-controls (pageChange)="p =$event"></pagination-controls>
     </div>
     </div>
     </div>

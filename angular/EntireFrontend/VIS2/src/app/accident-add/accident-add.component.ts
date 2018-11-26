@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class AccidentAddComponent implements OnInit {
 
   customer_id:string;
-vehicles:any[];
+vehicles:any[];message:string;
 vehicle:Vehicle;
 accident:FormGroup;
 accidents:Accident[];
@@ -32,8 +32,8 @@ get cid(){
 
             return;
           }
-        alert(data);
-          
+        //alert(data);
+          this.message=data;
         });
 
   }
