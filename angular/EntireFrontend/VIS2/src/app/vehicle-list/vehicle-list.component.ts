@@ -10,8 +10,9 @@ import { VehicleService } from '../vehicle.service';
 })
 export class VehicleListComponent implements OnInit {
   
-
+searchterm:string;
     vehicles:Vehicle[];
+  message: string;
     
     
       constructor(private router: Router, private vs: VehicleService) { }
@@ -21,13 +22,36 @@ export class VehicleListComponent implements OnInit {
       this.router.navigate(['']);
     }
         this.vs.getPolicies()
-          .subscribe( data => {        
+          .subscribe( data => {    
+            if(data==null)    {
+              this.message="No records available";
+              this.vehicles=null;
+              return;
+            }
+            this.message=null;
             this.vehicles = data;
           });
       };
     
-    
+    search(){
+ 
+      this.vs.search(this.searchterm)
+      .subscribe( data => {        
+        if(data==null){
+          this.message="No records available";
+          this.vehicles=null;
+          return;
+        }else{
+          this.message=null;
+    this.vehicles = data;
+
+        }
+        
+
+
+    });
     
       }
  
 
+    }

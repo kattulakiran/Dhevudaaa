@@ -40,6 +40,7 @@
                 <th>Date Of Purchase</th>
                 <th>Price</th>
                 <th>Premium Amount</th>
+                <th>Maturity Date</th>
         
               </tr>
               <tr *ngFor="let vehicle of vehicles | paginate: {itemsPerPage:5, currentPage:p}">
@@ -57,10 +58,12 @@
                 <td>{{vehicle.date_of_purchase}}</td>
                 <td>{{vehicle.price}}</td>
                 <td>{{vehicle.premium_amount}}</td>
+                <td>{{vehicle.maturity_date}}</td>
               </tr>
             
      
     </table>
+    <h4 style="color:rgb(5, 5, 5)">{{message}}</h4>
     <pagination-controls (pageChange)="p =$event"></pagination-controls>
     </div>
     </div>

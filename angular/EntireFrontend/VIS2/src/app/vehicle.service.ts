@@ -182,6 +182,12 @@ cancelpolicyStatus(policy_id:string):Observable<any>{
   return this.http.get('http://10.230.166.68:1216/vims/cancel/approve/'+policy_id,{ responseType: 'text' as 'text'});
 }
 
+
+public search(searchterm:string):Observable<any>{
+  return this.http.get('http://10.230.166.68:1216/vims/vehicle/findvehiclesbycustomerid/'+searchterm);  
+
+}
+
 }
 
 

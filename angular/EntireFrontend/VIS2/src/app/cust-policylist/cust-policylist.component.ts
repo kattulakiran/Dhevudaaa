@@ -13,6 +13,7 @@ export class CustPolicylistComponent implements OnInit {
   customer_id:string;
   vehicle:Vehicle=new Vehicle();
   vehicles:Vehicle[];
+  message: string;
 
   constructor(private route:Router,private vs:VehicleService) { }
 
@@ -21,11 +22,11 @@ export class CustPolicylistComponent implements OnInit {
 
       this.route.navigate(['']);
     }
-    console.log(this.cid)
+
     this.vs.custpolicies(this.cid)
         .subscribe( data => {        
-          if(data=='custId not found'){
-            alert("Invalid Customer Id");
+          if(data==null){
+            this.message="No records available";
           }else{
       this.vehicles = data;
           }

@@ -13,6 +13,7 @@ export class RegPaiddetailsComponent implements OnInit {
   regpays:Registerpay[];
   policy_id:string;
   vehicles: any;
+  message: string;
   constructor(private route:Router,private vs:VehicleService) { }
 
   ngOnInit( ) {
@@ -38,7 +39,13 @@ get cid(){
 
   private regpaiddetails(){
     this.vs.regpaiddetails(this.regpay.policy_id)
-    .subscribe( data => {        
+    .subscribe( data => {   
+      if(data==null){
+        this.message="No records available";
+        this.regpays=null;
+        return;
+      } 
+  this.message=null;
       this.regpays = data;
     });
     }

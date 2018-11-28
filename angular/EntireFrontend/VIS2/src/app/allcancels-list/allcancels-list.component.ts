@@ -13,6 +13,7 @@ cancel:Cancel=new Cancel();
 cancels:Cancel[];
 policy_id:string;
   result:string=null;
+  message: string;
   constructor(private vs:VehicleService,private router:Router) { }
 
   ngOnInit() {
@@ -22,7 +23,13 @@ policy_id:string;
       this.router.navigate(['']);
     }
     this.vs.cancelpolicy()
-    .subscribe( data => {        
+    .subscribe( data => {    
+      if(data==null)    {
+        this.message="No records available";
+        this.cancels=null;
+        return;
+      }
+      this.message=null;
       this.cancels = data;
       
     });

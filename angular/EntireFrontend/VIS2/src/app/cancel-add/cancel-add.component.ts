@@ -12,6 +12,7 @@ export class CancelAddComponent implements OnInit{
 cancel:Cancel=new Cancel();message:string;
 vehicles:any[];
 ngOnInit(){
+  this.message="Please enter valid details"
   if(sessionStorage.getItem('username')==null){
 
     this.router.navigate(['']);

@@ -11,12 +11,19 @@ import { Router } from '@angular/router';
 export class TheftListComponent implements OnInit{
 theft:Theft=new Theft();
 thefts:Theft[];
-customer_id:string;
+customer_id:string;message:string;
   constructor(private vs:VehicleService,private router:Router) { }
 
   theftlist(){
     this.vs.theftlist(this.cid)
-    .subscribe( data => {        
+    .subscribe( data => {   
+
+      if(data==null){
+        this.message="No records available";
+        this.thefts=null;
+        return;
+      }
+      this.message=null;
     this.thefts=data;
  
     });

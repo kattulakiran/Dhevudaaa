@@ -19,12 +19,14 @@ get cid(){
   return sessionStorage.getItem('cid');
 }
   savetheft(){
+    if(this.theft.invalid){
+
+      this.message="Please enter valid details"
+      return;
+    }
     this.vs.savetheft(this.theft.value)
           .subscribe( data => {
-            if(this.theft.invalid){
-
-              return;
-            }
+           
          // alert(data);
             this.message=data;
           });

@@ -42,6 +42,10 @@ logout(){
 
 
   ngOnInit() {
+    if(sessionStorage.getItem('username')==null){
+
+      this.route.navigate(['']);
+    }
   }
 
 }

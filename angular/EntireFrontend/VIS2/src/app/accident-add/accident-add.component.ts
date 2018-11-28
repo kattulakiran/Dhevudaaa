@@ -25,13 +25,14 @@ get cid(){
   return sessionStorage.getItem('cid');
 }
  saveaccident(){
-   
+  if(this.accident.invalid){
+
+    this.message="Please enter valid details"
+    return;
+  }
   this.vs.saveaccident(this.accident.value)
         .subscribe( data => {
-          if(this.accident.invalid){
-
-            return;
-          }
+         
         //alert(data);
           this.message=data;
         });

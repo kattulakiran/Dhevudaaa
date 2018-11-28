@@ -16,6 +16,7 @@ policy_id:string;
 vehicle:Vehicle=new Vehicle();
 vehicles:Vehicle[];
 result:string=null;
+  message: string;
   constructor(private vs:VehicleService,private router:Router) { }
 
   ngOnInit() {
@@ -25,7 +26,13 @@ result:string=null;
       this.router.navigate(['']);
     }
     this.vs.cancelreqpolicy()
-    .subscribe( data => {         
+    .subscribe( data => {     
+      if(data==null)    {
+        this.message="No records available";
+        this.vehicles=null;
+        return;
+      }
+      this.message=null;
       this.vehicles = data;
       
     });

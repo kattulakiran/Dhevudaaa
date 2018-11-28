@@ -14,6 +14,7 @@ directpay:Directpay=new Directpay();
 
   
   vehicles: any;
+  message: string;
   constructor(private route:Router,private vs:VehicleService) { }
 
   ngOnInit( ) {
@@ -39,7 +40,12 @@ get cid(){
 
 private paiddetails(){
 this.vs.paiddetails(this.directpay.policy_id)
-.subscribe( data => {        
+.subscribe( data => {  
+  if(data==null){
+    this.message="No records available";
+    this.directpays=null;
+    return;
+  }     this.message=null; 
   this.directpays = data;
 });
 }

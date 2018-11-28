@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AllclaimsList2Component implements OnInit {
 theft:Theft=new Theft();
 thefts:Theft[];
+  message: string;
   constructor(private vs:VehicleService,private router:Router) { }
 
 
@@ -22,7 +23,13 @@ claim_id:string;
       this.router.navigate(['']);
     }
     this.vs.theftpolicies()
-    .subscribe( data => {        
+    .subscribe( data => {   
+      if(data==null)     {
+        this.message="No records available";
+        this.thefts=null;
+        return;
+      }
+      this.message=null;
       this.thefts = data;
       
     });

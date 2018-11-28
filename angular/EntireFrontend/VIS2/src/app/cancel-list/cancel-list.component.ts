@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cancel-list.component.css']
 })
 export class CancelListComponent implements OnInit {
-  customer_id:string;
+  customer_id:string;message:string;
   cancel:Cancel=new Cancel();
   cancels:Cancel[];
   constructor(private vs:VehicleService,private router:Router) {} 
@@ -18,7 +18,14 @@ get cid(){
 }
   cancellist(){
     this.vs.cancellist(this.cid)
-    .subscribe( data => {        
+    .subscribe( data => {      
+      if(data==null){
+       
+        this.message='No records available';
+        this.cancels=null;
+        return;
+      }  
+      this.message=null;
     this.cancels=data;
  
     });

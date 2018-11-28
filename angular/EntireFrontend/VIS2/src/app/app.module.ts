@@ -42,6 +42,7 @@ import {VerifyGuard} from './verify.guard';
 import { AlertsModule } from 'angular-alert-module';
 import { CancelsampleComponent } from './cancelsample/cancelsample.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,  ReactiveFormsModule,AlertsModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    AngularFontAwesomeModule
  
   ],
   providers: [VehicleService,VerifyGuard],

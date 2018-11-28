@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AccidentListComponent implements OnInit {
 accident:Accident=new Accident();
 accidents:Accident[];
-customer_id:string;
+customer_id:string;message:string;
   constructor(private vs:VehicleService,private router:Router) { }
 get cid(){
   return sessionStorage.getItem('cid');
@@ -19,7 +19,13 @@ get cid(){
 
   accidentlist(){
     this.vs.accidentlist(this.customer_id)
-    .subscribe( data => {        
+    .subscribe( data => {   
+      if(data==null){
+        this.message="No records available"
+        this.accidents=null;
+        return;
+      }     
+      this.message=null;
      this.accidents=data;
     });
     }

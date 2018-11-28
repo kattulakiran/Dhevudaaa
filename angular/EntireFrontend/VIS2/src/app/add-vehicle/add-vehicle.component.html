@@ -21,7 +21,7 @@
         <div class="col-sm-12">
           <div class="row justify-content-center">
         
-            <div class="col-md-4"><label style="color: white" ><h5>Customer Id :</h5></label> </div>
+            <div class="col-md-4"><label style="color: white" ><h5>*Customer Id :</h5></label> </div>
           <div class="col-md-4">
               <input type="text" name="customer_id" formControlName="customer_id" placeholder="Enter customer_id" class="form-control " required>
           </div>
@@ -32,7 +32,7 @@
            <div class="col-sm-12 mt-3">
                   <div class="row justify-content-center">
                 
-                    <div class="col-md-4"><label style="color: white" ><h5>Vehicle Owner Name :</h5></label> </div>
+                    <div class="col-md-4"><label style="color: white" ><h5>*Vehicle Owner Name :</h5></label> </div>
                   <div class="col-md-4">
                       <input type="text" name="vehicle_owner" formControlName="vehicle_owner" pattern="[a-zA-Z+' ']{1,}"placeholder="Enter Owner's Full Name" class="form-control " required>
                       <div *ngIf="f.vehicle_owner.errors" >
@@ -47,7 +47,7 @@
           <div class="col-sm-12 mt-3">
             <div class="row justify-content-center">
           
-              <div class="col-md-4"><label style="color: white" ><h5>Vehicle Registration State :</h5></label> </div>
+              <div class="col-md-4"><label style="color: white" ><h5>*Vehicle Registration State :</h5></label> </div>
             <div class="col-md-4">
                 <select name="vehicle_state" formControlName="vehicle_state" class="form-control" required>
     
@@ -99,7 +99,7 @@
              <div class="col-sm-12 mt-3">
               <div class="row justify-content-center">
             
-                <div class="col-md-4"><label style="color: white" ><h5>Vehicle Type :</h5></label> </div>
+                <div class="col-md-4"><label style="color: white" ><h5>*Vehicle Type :</h5></label> </div>
               <div class="col-md-4">
                   <select name="vehicle_type" formControlName="vehicle_type"  class="form-control " required>
                     <option value="" selected="selected" disabled>--Vehicle Type--</option>  
@@ -115,7 +115,7 @@
                 <div class="col-sm-12 mt-3">
                     <div class="row justify-content-center">
                   
-                      <div class="col-md-4"><label style="color: white" ><h5>Vehicle Class :</h5></label> </div>
+                      <div class="col-md-4"><label style="color: white" ><h5>*Vehicle Class :</h5></label> </div>
                     <div class="col-md-4">
                         <select name="vehicle_class" formControlName="vehicle_class"  class="form-control " required>
                           <option value="" selected="selected" disabled>--Vehicle Class--</option>  
@@ -131,7 +131,7 @@
              <div class="col-sm-12 mt-3">
                 <div class="row justify-content-center">
               
-                  <div class="col-md-4"><label style="color: white" ><h5>Manufacturer :</h5></label> </div>
+                  <div class="col-md-4"><label style="color: white" ><h5>*Manufacturer :</h5></label> </div>
                 <div class="col-md-4">
                     <input type="text" name="manufacturer" formControlName="manufacturer" placeholder="Manufacturer" class="form-control " required>
                  
@@ -143,7 +143,7 @@
             <div class="col-sm-12 mt-3">
                 <div class="row justify-content-center">
               
-                  <div class="col-md-4"><label style="color: white" ><h5>Model :</h5></label> </div>
+                  <div class="col-md-4"><label style="color: white" ><h5>*Model :</h5></label> </div>
                 <div class="col-md-4">
                     <input type="text" name="model" formControlName="model" placeholder="Model Name" class="form-control "required>
                  
@@ -155,7 +155,7 @@
          <div class="col-sm-12 mt-3">
             <div class="row justify-content-center">
           
-              <div class="col-md-4"><label style="color: white" ><h5>Engine Number :</h5></label> </div>
+              <div class="col-md-4"><label style="color: white" ><h5>*Engine Number :</h5></label> </div>
             <div class="col-md-4">
                 <input type="text" name="engine_number" formControlName="engine_number" pattern="[a-zA-Z0-9]{1,}" placeholder="Engine Number" class="form-control " required>
                 <div *ngIf="f.engine_number.errors" >
@@ -171,9 +171,9 @@
      <div class="col-sm-12 mt-3">
         <div class="row justify-content-center">
       
-          <div class="col-md-4"><label style="color: white" ><h5>Make Year :</h5></label> </div>
+          <div class="col-md-4"><label style="color: white" ><h5>*Make Year :</h5></label> </div>
         <div class="col-md-4">
-          <input type="text" name="make_year" formControlName="make_year" pattern="[0-9]{1,}"placeholder="Vehicle Make Year" class="form-control " required>
+          <input type="text" name="make_year" formControlName="make_year" pattern="[0-9]{4}"placeholder="Vehicle Make Year" class="form-control " required>
           <div *ngIf="f.make_year.errors" >
             <div *ngIf="f.make_year.errors&&!f.make_year.pristine"
              class="dinesh">Make year must contain only numbers </div>
@@ -187,7 +187,7 @@
     <div class="col-sm-12 mt-3">
     <div class="row justify-content-center">
     
-      <div class="col-md-4"><label style="color: white" ><h5>Registration Location :</h5></label> </div>
+      <div class="col-md-4"><label style="color: white" ><h5>*Registration Location :</h5></label> </div>
     <div class="col-md-4">
         <input type="text" name="registering_location" formControlName="registering_location" placeholder="Registration Location" class="form-control " required>
      
@@ -199,7 +199,7 @@
     <div class="col-sm-12 mt-3">
     <div class="row justify-content-center">
     
-    <div class="col-md-4"><label style="color: white" ><h5>Date Of Purchase :</h5></label> </div>
+    <div class="col-md-4"><label style="color: white" ><h5>*Date Of Purchase :</h5></label> </div>
     <div class="col-md-4">
       <input type="date" name="date_of_purchase" formControlName="date_of_purchase" placeholder="Date Of Purchase" class="form-control " required>
     
@@ -211,7 +211,7 @@
     <div class="col-sm-12 mt-3">
     <div class="row justify-content-center">
     
-    <div class="col-md-4"><label style="color: white" ><h5>Price :</h5></label> </div>
+    <div class="col-md-4"><label style="color: white" ><h5>*Price :</h5></label> </div>
     <div class="col-md-4">
       <input type="text" name="price" formControlName="price" pattern="[0-9]{1,}"placeholder="Price Of Vehicle" class="form-control " required>
       <div *ngIf="f.price.errors" >
@@ -240,7 +240,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

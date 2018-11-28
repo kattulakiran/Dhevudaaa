@@ -244,8 +244,9 @@ public class Controller {
 	@GetMapping(value = "/vehicle/findall")
 	public ResponseEntity<?> listAllVehicles() {
 		vehicles = vehicleService.findAll();
-		if (vehicles.isEmpty()) {
-			return new ResponseEntity<String>("No Records available in DB", HttpStatus.OK);
+		if (vehicles.size()==0) {
+			vehicles=null;
+			return new ResponseEntity<List<VehicleRegistration>>(vehicles, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<List<VehicleRegistration>>(vehicles, HttpStatus.OK);
@@ -257,9 +258,10 @@ public class Controller {
 		
 		List<VehicleRegistration>vehicles=custService.getVehicleDetails(customer_id);
 		
-		if(vehicles==null) {
+		if(vehicles.size()==0) {
+			vehicles=null;
 			//System.out.println("---- null");
-			return new ResponseEntity<String>("custId not found",HttpStatus.OK);
+			return new ResponseEntity<List<VehicleRegistration>>(vehicles,HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<List<VehicleRegistration>> (vehicles,HttpStatus.OK);
@@ -308,6 +310,9 @@ public class Controller {
 	
 	@PostMapping(value = "/directpay/save")
 	public ResponseEntity<?> saveDirectPay(@RequestBody DirectPay pay) {
+		if(pay.getPolicy_id()==null){
+			return new ResponseEntity<String>("please enter required fields", HttpStatus.OK);
+		}
 		VehicleRegistration v=vehicleService.findById(pay.getPolicy_id()).get();
 		//pay.setVehicle(v);
 		//System.out.println("line1");
@@ -362,7 +367,7 @@ public class Controller {
 		cal.setTime(max);
 		
 		if(max.before(d)){
-			return new ResponseEntity<String>("you cannot pay using direct pay as due date is over. Please proceed to Registered Pay.", HttpStatus.OK);
+			return new ResponseEntity<String>("You cannot pay using direct pay as due date is over. Please proceed to Registered Pay.", HttpStatus.OK);
 		}
 		//cal.setTime(max);
 		cal.add(Calendar.MONTH, 1);
@@ -404,7 +409,8 @@ public class Controller {
 		List<DirectPay>l1=vehicleService.getDirectPayDetails(policy_id);
 		
 		if (l1.size()==0) {
-			return new ResponseEntity<String>("No registered payments available in DB", HttpStatus.OK);
+			l1=null;
+			return new ResponseEntity<List<DirectPay>>(l1, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<List<DirectPay>>(l1, HttpStatus.OK);
@@ -463,7 +469,7 @@ public class Controller {
 		c.setTime(max);
 		c.set(2000, 01, 01);
 		max=c.getTime();
-		//System.out.println("line1");
+		System.out.println("line1");
 		Date d=new Date();
 		if(l1.size()==0&&l2.size()==0){
 			pay.setPaid_date(d);
@@ -501,41 +507,42 @@ public class Controller {
 				}
 		}
 		}
-		//System.out.println("line2");
+		System.out.println("line2");
 		Calendar cal1=Calendar.getInstance();
 		pay.setDue_date(max);
 		cal1.setTime(max);
 		if(max.after(d)){
-			return new ResponseEntity<String>("registered pay cannot be done as due date is not over", HttpStatus.OK);
+			return new ResponseEntity<String>("Registered pay cannot be done as due date is not over", HttpStatus.OK);
 		}
+		pay.setPaid_date(d);
 		cal1.setTime(pay.getPaid_date());
 		cal1.add(Calendar.MONTH, 1);
-		pay.setPaid_date(d);
+		
 		
 		String pa=v.getPremium_amount();
 		 double fap=0;
     	 Date d1=max;
     	 
     		        Date d2=pay.getPaid_date();
-    		        //System.out.println("line5");
+    		        System.out.println("line5");
     		        Calendar cal=Calendar.getInstance();
     		        cal.setTime(d1); 
-    		        //System.out.println("line6");
+    		        System.out.println("line6");
     		        double g1=cal.getTimeInMillis();
     		        
     		        cal.setTime(d2);
-    		        //System.out.println("line7");
+    		        System.out.println("line7");
     		        double g2=cal.getTimeInMillis();
-    		        //System.out.println("line3");
+    		        System.out.println("line3");
     		        double diff=(g2-g1)/(60*60*24*1000);
     		        int months=(int) (diff/28);
     		        
-    		        //System.out.println("line4");
-    		        //System.out.println(pa);
-    		       // System.out.println(pay.getPayment_mode());
+    		        System.out.println("line4");
+    		        System.out.println(pa);
+    		        System.out.println(pay.getPayment_mode());
     		        if(pay.getPayment_mode().equalsIgnoreCase("credit card")){
     		        	
-    		        	//System.out.println("cerdit");
+    		        	System.out.println("cerdit");
     	
     		      fap=Math.round(Double.parseDouble(pa)+(Double.parseDouble(pa)*months)+Double.parseDouble(pa)*diff*(0.0056)+((Double.parseDouble(pa)*months)+Double.parseDouble(pa)*diff*(0.0056))*0.023);
     		       
@@ -543,9 +550,9 @@ public class Controller {
     		        }
     		        
     		        else{
-    		        	//System.out.println("othr");
+    		        	System.out.println("othr");
     		        	 fap=Math.round(Double.parseDouble(pa)+(Double.parseDouble(pa)*months)+Double.parseDouble(pa)*diff*(0.0056));
-    		      // System.out.println("afte other");
+    		       System.out.println("afte other");
     		        }
     		        
     		        String fap1=String.valueOf(fap);
@@ -662,7 +669,8 @@ public class Controller {
 		List<RegisteredPay>l1=vehicleService.getRegisteredPayDetails(policy_id);
 		
 		if (l1.size()==0) {
-			return new ResponseEntity<String>("No registered payments available in DB", HttpStatus.OK);
+			l1=null;
+			return new ResponseEntity<List<RegisteredPay>>(l1, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<List<RegisteredPay>>(l1, HttpStatus.OK);
@@ -751,7 +759,7 @@ public class Controller {
         List<AccidentClaim>aclaims=vehicleService.getAccidentClaimDetails(accidentclaim.getPolicy_id());
         List<TheftClaim>tclaims=vehicleService.getTheftClaimDetails(accidentclaim.getPolicy_id());
         if(aclaims.size()>0||tclaims.size()>0) {
-        	return new ResponseEntity<String>("not eligible for claim as you have already claimed", HttpStatus.OK);
+        	return new ResponseEntity<String>("Not eligible for claim as you have already claimed", HttpStatus.OK);
         }
         System.out.println("line2");
         //double totalamount=Double.parseDouble(accidentclaim.getTotal_amount());
@@ -768,12 +776,12 @@ public class Controller {
         if(cal.before(d)){
         	maxamount=vehicleprice/2;
         	if(maxamount<claimamount){
-        		return new ResponseEntity<String>("not eligible for claim as vehicle is purchased before 5years and max claim amount is half of vehicle price", HttpStatus.OK);
+        		return new ResponseEntity<String>("Not eligible for claim as vehicle is purchased before 5years and max claim amount is half of vehicle price", HttpStatus.OK);
         	}
         }else{
         	maxamount=vehicleprice*1.02;
         	if(maxamount<claimamount){
-        		return new ResponseEntity<String>("not eligible for claim as max claim amount is 2% more than vehicle price", HttpStatus.OK);
+        		return new ResponseEntity<String>("Not eligible for claim as max claim amount is 2% more than vehicle price", HttpStatus.OK);
         	}
         }System.out.println("line4");System.out.println(accidentclaim.getTotal_amount());
 		 System.out.println(accidentclaim.getWeightage());
@@ -782,10 +790,10 @@ public class Controller {
 		 //
 		 
 		if(claimamount<5000&&v.getVehicle_type()=="TW") {
-			return new ResponseEntity<String>("not eligible for claim as claim amount is less than 5000", HttpStatus.OK);
+			return new ResponseEntity<String>("Not eligible for claim as claim amount is less than 5000", HttpStatus.OK);
 		}
 		else if(claimamount<20000&&v.getVehicle_type()=="FW") {
-			return new ResponseEntity<String>("not eligible for claim as claim amount is less than 20000", HttpStatus.OK);
+			return new ResponseEntity<String>("Not eligible for claim as claim amount is less than 20000", HttpStatus.OK);
 		}
 		accidentclaim.setClaim_amount(Double.toString(claimamount));
 		accidentclaim.setStatus("Processing");
@@ -797,7 +805,7 @@ public class Controller {
 			return new ResponseEntity<String>("accidentclaim not saved", HttpStatus.OK);
 
 		}
-		return new ResponseEntity<String>("claimed processed sucessfully and claim id is :"+accidentclaim.getClaim_id()+" and claimed amount is:"+accidentclaim.getClaim_amount(), HttpStatus.OK);
+		return new ResponseEntity<String>("Claim processed sucessfully and claim id is :"+accidentclaim.getClaim_id()+" and claimed amount is:"+accidentclaim.getClaim_amount(), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/findtotalamount")
@@ -842,14 +850,15 @@ public class Controller {
 				}
 		}
 }
-		return new ResponseEntity<String>("total amount paid is : Rs."+directamount+" with policy id: "+accidentclaim.getPolicy_id(), HttpStatus.OK);
+		return new ResponseEntity<String>("Total amount paid is : Rs."+directamount+" with policy id: "+accidentclaim.getPolicy_id(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/accidentclaim/findall")
 	public ResponseEntity<?> listAllAccidentClaim() {
 		accidentclaims = accidentclaimservice.findAll();
-		if (accidentclaims.isEmpty()) {
-			return new ResponseEntity<String>("No Records available in DB", HttpStatus.OK);
+		if (accidentclaims.size()==0) {
+			accidentclaims=null;
+			return new ResponseEntity<List<AccidentClaim>>(accidentclaims, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<List<AccidentClaim>>(accidentclaims, HttpStatus.OK);
@@ -862,9 +871,10 @@ public class Controller {
 		
 		List<AccidentClaim>aclaims=custService.getAccidentClaimDetails(custId);
 		
-		if(aclaims==null) {
+		if(aclaims.size()==0) {
 			//System.out.println("---- null");
-			return new ResponseEntity<String>("claim_id   "+custId+"  not found",HttpStatus.OK);
+			aclaims=null;
+			return new ResponseEntity<List<AccidentClaim>>(aclaims,HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<List<AccidentClaim>> (aclaims,HttpStatus.OK);
@@ -935,10 +945,10 @@ public class Controller {
         List<AccidentClaim>aclaims=vehicleService.getAccidentClaimDetails(theftclaim.getPolicy_id());
         List<TheftClaim>tclaims=vehicleService.getTheftClaimDetails(theftclaim.getPolicy_id());
         if(aclaims.size()>0||tclaims.size()>0) {
-        	return new ResponseEntity<String>("not eligible for claim as you have already claimed", HttpStatus.OK);
+        	return new ResponseEntity<String>("Not eligible for claim as you have already claimed", HttpStatus.OK);
         }
         if(diff>10){
-        	return new ResponseEntity<String>("not eligible for claim as you have filed complaint after 10days of theft", HttpStatus.OK);
+        	return new ResponseEntity<String>("Not eligible for claim as you have filed complaint after 10days of theft", HttpStatus.OK);
         }
         
         Date d=new Date();
@@ -952,13 +962,13 @@ public class Controller {
         if(cal1.before(d)){
         	maxamount=vehicleprice/2;
         	if(maxamount<claimamount){
-        		return new ResponseEntity<String>("not eligible for claim as vehicle is registered 5 years ago and maximum claim amount is half of vehicle price", HttpStatus.OK);
+        		return new ResponseEntity<String>("Not eligible for claim as vehicle is registered 5 years ago and maximum claim amount is half of vehicle price", HttpStatus.OK);
         	}
         }else{
         	
         	maxamount=vehicleprice*1.02;
         	if(maxamount<claimamount){
-        		return new ResponseEntity<String>("not eligible for claim as max claimable amount is 2% greater than vehicle price", HttpStatus.OK);
+        		return new ResponseEntity<String>("Not eligible for claim as max claimable amount is 2% greater than vehicle price", HttpStatus.OK);
         	}
         }
         theftclaim.setClaim_amount(Double.toString(claimamount));
@@ -969,7 +979,7 @@ public class Controller {
 			return new ResponseEntity<String>("theftclaim not saved", HttpStatus.OK);
 
 		}
-		return new ResponseEntity<String>("claimed processed successfully and claim id is: "+theftclaim.getClaim_id()+"claimed amount is :"+theftclaim.getClaim_amount(), HttpStatus.OK);
+		return new ResponseEntity<String>("Claimed processed successfully and claim id is: "+theftclaim.getClaim_id()+"claimed amount is :"+theftclaim.getClaim_amount(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/theftclaim/approve/{claim_id}")
@@ -1005,8 +1015,9 @@ public class Controller {
 	@GetMapping(value = "/theftclaim/findall")
 	public ResponseEntity<?> listAllTheftClaim() {
 		theftclaims = theftclaimservice.findAll();
-		if (theftclaims.isEmpty()) {
-			return new ResponseEntity<String>("No Records available in DB", HttpStatus.OK);
+		if (theftclaims.size()==0) {
+			theftclaims=null;
+			return new ResponseEntity<List<TheftClaim>>(theftclaims, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<List<TheftClaim>>(theftclaims, HttpStatus.OK);
@@ -1034,9 +1045,10 @@ public class Controller {
 		
 		List<TheftClaim>aclaims=custService.getTheftClaimDetails(custId);
 		
-		if(aclaims==null) {
+		if(aclaims.size()==0) {
+			aclaims=null;
 			//System.out.println("---- null");
-			return new ResponseEntity<String>("claim_id   "+custId+"  not found",HttpStatus.OK);
+			return new ResponseEntity<List<TheftClaim>>(aclaims,HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<List<TheftClaim>> (aclaims,HttpStatus.OK);
@@ -1238,7 +1250,7 @@ public class Controller {
 	    		   double t=0;
 	    		   String to=String.valueOf(t);
 	    		   can.setWithdraw_amount(to);
-	    		   return new ResponseEntity<String>("not eligible for cancellation as 3 months is not completed", HttpStatus.OK);
+	    		   return new ResponseEntity<String>("Not eligible for cancellation as 3 months is not completed", HttpStatus.OK);
 	    	   }
 	       }
 	       can.setCustomer_id(v.getCustomer_id());
@@ -1258,7 +1270,7 @@ public class Controller {
 		//Customer c=custService.findById(can.getCustomer_id()).get();
 		
 		
-		return new ResponseEntity<String>("total amount paid is :"+directamount+" and last paid date is :"+max, HttpStatus.OK);
+		return new ResponseEntity<String>("Cancellation processed successfully. Cancel Id is: "+can.getCancel_id()+" amount can be withdrawn is : "+can.getWithdraw_amount(), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/cancel/viewCancellation")
@@ -1433,7 +1445,7 @@ public class Controller {
 	    		   double t=0;
 	    		   String to=String.valueOf(t);
 	    		   can.setWithdraw_amount(to);
-	    		   return new ResponseEntity<String>("not eligible for cancellation as 3 months is not completed", HttpStatus.OK);
+	    		   return new ResponseEntity<String>("Not eligible for cancellation as 3 months is not completed", HttpStatus.OK);
 	    	   }
 	       }
 	       List<Cancellation> cancellist=vehicleService.getCancellationDetails(can1.getPolicy_id());
@@ -1445,7 +1457,7 @@ public class Controller {
 			return new ResponseEntity<String>("cancel not saved", HttpStatus.OK);
 
 	}
-		return new ResponseEntity<String>("total amount that can be withdrawn is : "+can.getWithdraw_amount()+" last paid date is: "+lastpaiddate, HttpStatus.OK);
+		return new ResponseEntity<String>("Total amount that can be withdrawn is : "+can.getWithdraw_amount()+" last paid date is: "+lastpaiddate, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/cancel/findallduevehicles")
@@ -1508,7 +1520,8 @@ public class Controller {
 				
 		}
 		if(duevehicles.size()==0){
-			return new ResponseEntity<String>("No Records available in DB", HttpStatus.OK);
+			duevehicles=null;
+			return new ResponseEntity<List<VehicleRegistration>>(duevehicles, HttpStatus.OK);
 		}
 		else{
 			return new ResponseEntity<List<VehicleRegistration>>(duevehicles, HttpStatus.OK);
@@ -1519,8 +1532,9 @@ public class Controller {
 	@GetMapping(value = "/cancel/findall")
 	public ResponseEntity<?> listAllCancellation() {
 		cancels = cancelservice.findAll();
-		if (cancels.isEmpty()) {
-			return new ResponseEntity<String>("No Records available in DB", HttpStatus.OK);
+		if (cancels.size()==0) {
+			cancels=null;
+			return new ResponseEntity<List<Cancellation>>(cancels, HttpStatus.OK);
 		}
 
 		return new ResponseEntity<List<Cancellation>>(cancels, HttpStatus.OK);
@@ -1549,8 +1563,8 @@ public class Controller {
 		List<Cancellation>cancel=custService.getCancellationDetails(customer_id);
 		
 		if(cancel.size()==0) {
-			
-			return new ResponseEntity<String>(" You have not cancelled any policies",HttpStatus.OK);
+			cancel=null;
+			return new ResponseEntity<List<Cancellation>>(cancel,HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<List<Cancellation>> (cancel,HttpStatus.OK);
@@ -1599,7 +1613,21 @@ public class Controller {
 		Date lastpaiddate=c1.getTime();
 		System.out.println("line1");
 		double directamount=0;
-				if(l1.size()==0){
+		if(l1.size()==0&&l2.size()==0){
+			vehicleService.deleteById(can.getPolicy_id());
+			can.setCancel_date(new Date());
+			can.setLast_paid_date(null);
+			can.setPolicy_id(policy_id);
+			 can.setCustomer_id(v.getCustomer_id());
+			can.setStatus("approved");
+			can.setWithdraw_amount("0");
+			
+			can.setTotal_amount("0");
+			can.setRegistered_date(null);
+			 can=cancelservice.save(can);
+			 return new ResponseEntity<String>("cancelled", HttpStatus.OK);
+		}
+		else if(l1.size()==0&&l2.size()!=0){
 					max=l2.get(0).getDue_date();
 					for(RegisteredPay l:l2) {directamount+=Double.parseDouble(l.getPay_amount());
 						if(l.getDue_date().after(max)) {
@@ -1610,7 +1638,7 @@ public class Controller {
 						}
 				}
 				}
-				else if(l2.size()==0){
+				else if(l2.size()==0&&l1.size()!=0){
 					max=l1.get(0).getDue_date();
 					for(DirectPay l:l1) {directamount+=(l.getAmount_paid());
 						if(l.getDue_date().after(max)) {
@@ -1620,7 +1648,7 @@ public class Controller {
 							lastpaiddate=l.getPayment_date();
 						}
 					}
-				}else{
+				}else if(l1.size()!=0&&l2.size()!=0){
 					for(DirectPay l:l1) {directamount+=(l.getAmount_paid());
 						if(l.getDue_date().after(max)) {
 							max=l.getDue_date();
@@ -1749,7 +1777,7 @@ public class Controller {
 	    		   double t=0;
 	    		   String to=String.valueOf(t);
 	    		   can.setWithdraw_amount(to);
-	    		   return new ResponseEntity<String>("not eligible for cancellation as 3 months is not completed", HttpStatus.OK);
+	    		   return new ResponseEntity<String>("Not eligible for cancellation as 3 months is not completed", HttpStatus.OK);
 	    	   }
 	       }
 	       can.setCustomer_id(v.getCustomer_id());

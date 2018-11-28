@@ -5,6 +5,19 @@ margin-bottom: auto;
 width: 320px;
 background-color: rgba(84, 84, 85, 0.5) !important;
       }
+.dinesh{
+    color:red;
+}
+
+
+      .card1{
+        height: 450px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 520px;
+    background-color: rgba(5, 5, 5, 0.5) !important;
+          }
+
 
 .bg-color{
     background-color: rgba(0,0,0,0.5) !important;

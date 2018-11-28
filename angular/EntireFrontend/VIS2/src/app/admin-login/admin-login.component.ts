@@ -12,6 +12,7 @@ export class AdminLoginComponent implements OnInit{
 message:string;
   adlogin:AdminLogin=new AdminLogin();
 
+ 
   ngOnInit(){
  
   }

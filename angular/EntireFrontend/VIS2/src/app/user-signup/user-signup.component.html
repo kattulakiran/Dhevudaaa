@@ -113,7 +113,7 @@
                 <div class="form-group">
                         <label style="color: oldlace" for="address"  class="col-sm-3 control-label">Address*</label>
                         <div class="col-sm-9">
-                            <textarea rows="5" formControlName="address" pattern="[a-zA-Z+' ']{1,}" placeholder="Address" class="form-control" required></textarea>
+                            <textarea rows="5" formControlName="address" pattern="" placeholder="Address" class="form-control" required></textarea>
                             <div *ngIf="f.address.errors" >
                                 <div *ngIf="f.address.errors&&!f.address.pristine" class="dinesh">address should contain only alphabets and spaces</div>
                             </div>
@@ -192,7 +192,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

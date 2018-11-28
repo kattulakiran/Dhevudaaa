@@ -24,7 +24,7 @@
                  <div class="col-sm-12 mt-3">
                         <div class="row justify-content-center">
                       
-                          <div class="col-md-4"><label style="color: white" ><h5>Policy Id :</h5></label> </div>
+                          <div class="col-md-4"><label style="color: white" ><h5>*Policy Id :</h5></label> </div>
                         <div class="col-md-4">
                                 <select formControlName="policy_id" name="policy_id" class="form-control ">
                                         <option value="null" disabled>--select policy--</option>
@@ -40,7 +40,7 @@
              <div class="col-sm-12 mt-3">
                 <div class="row justify-content-center">
               
-                  <div class="col-md-4"><label style="color: white" ><h5>Total Amount :</h5></label> </div>
+                  <div class="col-md-4"><label style="color: white" ><h5>*Total Amount :</h5></label> </div>
                 <div class="col-md-4">
                     <input type="text" formControlName="total_amount" pattern="[0-9]{1,}" name="total_amount"  placeholder="Total Amount" class="form-control " required>
                     <div *ngIf="f.total_amount.errors" >
@@ -57,7 +57,7 @@
      <div class="col-sm-12 mt-3">
         <div class="row justify-content-center">
       
-          <div class="col-md-4"><label style="color: white"><h5>Accident Type :</h5></label> </div>
+          <div class="col-md-4"><label style="color: white"><h5>*Accident Type :</h5></label> </div>
         <div class="col-md-4">
             <select formControlName="accident_type" name="accident_type" class="form-control ">
                 <option value="null">--Accident Type--</option>
@@ -90,7 +90,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

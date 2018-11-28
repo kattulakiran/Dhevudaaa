@@ -7,8 +7,16 @@
       <!---heading-->
           <header class="heading"> List of Policies</header><hr>
 
+     
+        
+          <input type="text" [(ngModel)]="searchterm" class="rounded" placeholder="Search: Customer_id ">
+          <button type="submit" class="btn btn-primary ml-2" (click)="search()"> <i class="fa fa-search"></i></button>
+                     
+                    
+            
+          
 
-          <div class="card ">
+          <div class="card mt-2">
             <div class="card-header"></div>
             <div class="card-body">
             
@@ -24,10 +32,11 @@
                 <th>Model</th>
                 <th>Engine Number</th>
                 <th>Make Year</th>
-                <th>Regiistering Location</th>
+                <th>Registering Location</th>
                 <th>Date Of Purchase</th>
                 <th>Price</th>
                 <th>Premium Amount</th>
+                <th>Maturity Date</th>
         
               </tr>
               <tr *ngFor="let vehicle of vehicles | paginate: {itemsPerPage:5, currentPage:p}">
@@ -45,9 +54,11 @@
                 <td>{{vehicle.date_of_purchase}}</td>
                 <td>{{vehicle.price}}</td>
                 <td>{{vehicle.premium_amount}}</td>
+                <td>{{vehicle.maturity_date}}</td>
               </tr>
             
               </table>
+              <h4 style="color:rgb(5, 5, 5)">{{message}}</h4>
               <pagination-controls (pageChange)="p =$event"></pagination-controls>
             
             </div>

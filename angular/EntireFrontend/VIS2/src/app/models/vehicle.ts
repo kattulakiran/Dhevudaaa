@@ -17,5 +17,6 @@ export class Vehicle {
     price:number;
     premium_amount:number;
     customer_id:string;
+    maturity_date:Date;
    
 }

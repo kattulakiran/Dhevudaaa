@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AllclaimsListComponent implements OnInit {
   accident:Accident=new Accident();
   accidents:Accident[];
+  message: string;
   constructor(private vs:VehicleService,private router:Router) { }
 
   result:string=null;
@@ -22,7 +23,13 @@ export class AllclaimsListComponent implements OnInit {
       this.router.navigate(['']);
     }
     this.vs.accidentpolicies()
-    .subscribe( data => {        
+    .subscribe( data => {   
+      if(data==null)     {
+        this.message="No records available";
+        this.accidents=null;
+        return;
+      }
+      this.message=null;
       this.accidents = data;
       
     });
